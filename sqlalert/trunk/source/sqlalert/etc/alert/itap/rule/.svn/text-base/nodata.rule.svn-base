@@ -1,0 +1,44 @@
+# This file defines the rule(rule) to detect NODATA event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# SQL statements to query document count of all nodes.
+__sql__ = "
+	SELECT   count(*) AS count
+	FROM     $(index)
+	WHERE    last(%(range))
+	GROUP BY node
+";
+
+
+# exec_rule() - Execute the rule and returns the result.
+#
+# @node_list:  List of itap node names.
+# @index_list: List of index names.
+def exec_rule(node_list, index_list) {
+	result_list  = [];
+	result_alert = [];
+
+	for index in index_list {
+		result = query(__sql__);
+		for item in result { result_list = append(result_list, item); }
+
+		res_node_list = item_values(result, "node");
+		for node in node_list {
+			if not (node in res_node_list) {
+				result_alert = append(result_alert, { "node": node, "index": index});
+			}
+		}
+	}
+
+	if result_alert {
+		node_dict = agg_items(result_list, "node");
+		for item in result_alert {
+			item["reason"] = (item["node"] in node_dict) ? desc_delay: desc_down;
+		}
+	}
+
+	return result_alert;
+}
+

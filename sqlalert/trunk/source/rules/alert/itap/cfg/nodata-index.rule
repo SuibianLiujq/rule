@@ -1,0 +1,49 @@
+# ########################################################################
+# This file defines the configuration of rule.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Base configuration of current rule.
+#
+# __range__:   Time interval (range) to detect.
+# __type__:    Alerting type.
+# __subtype__: Alerting sub-type.
+# __level__:   Alerting level.
+# ========================================================================
+__range__   = "5m";
+__type__    = "ITAP";
+__subtype__ = "NODATA_INDEX";
+__level__   = "CRITICAL";
+
+
+# ========================================================================
+# List of indices to detect.
+# ========================================================================
+__indexlist__   = [
+	"link-*",
+	"traffic-*",
+	"status-*",
+	"tcp-*",
+	"http-*",
+	"dummy-*"
+];
+
+
+# ========================================================================
+# List of iTAP nodes to detect.
+#
+# Overwrite the global iTAP list.
+# ========================================================================
+__itaplist__ = __itaplist__;
+
+
+# ========================================================================
+# Import the desc of current rule.
+#
+# This is different depends on language configuration.
+# ========================================================================
+import "alert/itap/desc/%(__sys_lang__)/nodata-index.rule";
+

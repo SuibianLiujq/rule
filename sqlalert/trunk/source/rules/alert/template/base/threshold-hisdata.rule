@@ -1,0 +1,343 @@
+# ########################################################################
+# This file define the rule template of history-data lerning.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# __query() - Query data from ES server.
+#
+# [Arguments]
+#     filter: Filter of the query result.
+# 
+# [Returns]
+#     Returns the list of results.
+# ========================================================================
+def __query(filter) {
+	__sql_select__ = __query_metrics__;
+	__sql_from__   = __index__;
+	__sql_where__  = [ __query_range__ ];
+	__sql_group__  = [ "date_histogram(%(__query_stat__)) AS @timestamp" ];
+
+	# Append iTAP node filter.
+	if is_str(__node__) && __node__ != "" {
+		__sql_where__ = append(__sql_where__, "node = '%(__node__)'");
+	} else if is_list(__node__) && len(__node__) != 0 {
+		__sql_where__ = append(__sql_where__, "node IN $(__node__)");
+	}
+
+	# Append query filter.
+	if is_list(__query_filter__) {
+		__sql_where__ = append_list(__sql_where__, __query_filter__);
+	}
+
+	# Append GROUP BY buckets.
+	if is_list(__buckets__) {
+		__sql_group__ = append_list(__sql_group__, __buckets__);
+	}
+
+	# Call the query function.
+	if is_null(__query_arg__) {
+		result = call(__query_func__, sql_make(), filter);
+	} else {
+		result = call(__query_func__, sql_make(), __query_arg__, filter);
+	}
+
+	# Aggregation.
+	if len(result) > 0 && is_str(__agg_items__) && __agg_items__ != "" {
+		return call(
+			"agg_items_%(__agg_items__)",
+			result,
+			__metric_name__,
+			__buckets__
+		);
+	}
+
+	return result;
+}
+
+
+# ========================================================================
+# __alert() - Output alert results.
+#
+# [Arguments]
+#     list: List of alerting results.
+#
+# [Returns]
+#     Returns the @list itself for chain.
+# ========================================================================
+def __alert(list) {
+	__fields__ = [ "@timestamp" ];
+
+	# Add "node" if configured.
+	if is_str(__node__) && __node__ != "" {
+		item_set(list, "node", __node__);
+		__fields__ = append(__fields__, "node");
+	}
+
+	# Add buckets fields.
+	# Use buckets as the throttling keys.
+	if is_list(__buckets__) {
+		__fields__ = append_list(__fields__, __buckets__);
+		__throttle_keys__ = __buckets__;
+	}
+
+
+	# Add metric fields.
+	# Use the main metric name as the sorting key.
+	__sort_key__ = __metric_name__;
+	__fields__   = append(__fields__, __metric_name__);
+
+
+	# Extend metric fields.
+	if is_list(__ext_metric_fields__) {
+		__fields__ = append_list(__fields__, __ext_metric_fields__);
+	}
+
+	# Extend fields.
+	if is_list(__ext_fields__) {
+		__fields__ = append_list(__fields__, __ext_fields__);
+	}
+
+	# Send alerting result and return the list.
+	return alert(list);
+}
+
+
+# ========================================================================
+# __make_filter() - Make SQL filter expression.
+#
+# [Arguments]
+#     list: A list of dict.
+#     keys: Keys for filter expression.
+#
+# [Returns]
+#     Returns a list contains the filter strings.
+# ========================================================================
+def __make_filter(list, keys) {
+	dict = {};
+	
+	# Use a dict to store the filter.
+	# To remove the duplication.
+	if is_list(keys) && len(keys) > 0 {
+		for item in list {
+			tmplist = [];
+
+			for k in keys {
+				if k in item {
+					if is_str(item[k]) {
+						tmplist = append(tmplist, k + " = '" + item[k] + "'");
+					} else {
+						tmplist = append(tmplist, k + " = '" + item[k]);
+					}
+				}
+			}
+
+			dict[join(tmplist, " AND ")] = true;
+		}
+	}
+
+	if len(dict) == 1 {
+		return [ keys(dict)[0] ];
+	} else if len(dict) > 1 {
+		return [ "(" + join(keys(dict), ") OR (") + ")" ];
+	}
+}
+
+
+# ========================================================================
+# __alert_append() - Append refer, factor to the alert result.
+#
+# [Arguments]
+#     list:   List to contain alerting result.
+#     item:   Item to append to the list.
+#     refer:  Value of "refer".
+#     factor: Value of "factor"
+#
+# [Returns]
+#     Returns the list with appending item.
+# ========================================================================
+def __alert_append(list, item, refer, factor) {
+	item[__metric_name__ + "_refer"]  = refer;
+	item["refer_factor"] = factor;
+	return append(list, item);
+}
+
+
+# ========================================================================
+# __check_alert() - Check history data for alert result.
+#
+# [Arguments]
+#     result:  List of alerting result.
+#     hisdata: List of hisory data.
+#
+# [Returns]
+#     Returns a list containing the alerting results.
+# ========================================================================
+def __check_alert(result, hisdata) {
+	listAlert = [];
+
+	# Aggregation with the buckets fields.
+	if is_list(__buckets__) {
+		dictResult = list_to_dict(result, __buckets__, "_");
+		dictHisdata = list_to_dict(hisdata, __buckets__, "_");
+
+		for key, list in dictResult {
+			if key in dictHisdata {
+				refer = dictHisdata[key][0][__metric_name__];
+				for item in list {
+					if item[__metric_name__] >= __factor__ * refer {
+						listAlert = __alert_append(listAlert, item, refer, __factor__);
+					}
+				}
+			} else {
+				for item in list {
+					listAlert = __alert_append(listAlert, item, 0, __factor__);
+				}
+			}
+		}
+	} else if len(result) == 1 && len(hisdata) == 1 {
+		item = result[0]; refer = hisdata[0][__metric_name__];
+
+		if item[__metric_name__] >= __factor__ * refer {
+			listAlert = __alert_append(listAlert, item, refer, __factor__);
+		}
+	}
+
+	return listAlert;
+}
+
+
+# ========================================================================
+# check_cfg() - Check whether the configuration is valid.
+#
+# [Arguments]
+#     Empty.
+#
+# [Returns]
+#     Returns true or false.
+# ========================================================================
+def check_cfg() {
+	if !is_str(__range__)          { error("Cfg '__range__' not a str or not found."); }
+	if !is_list(__query_metrics__) { error("Cfg '__query_metrics__' not a list or not found."); }
+	if !is_str(__query_index__)    { error("Cfg '__query_index__' not a str or not found."); }
+	if !is_str(__query_stat__)     { error("Cfg '__query_stat__' not a str or not found."); }
+	if !is_str(__metric_name__)    { error("Cfg '__metric_name__' not a str or not found."); }
+}
+
+
+# ========================================================================
+# __make_cond_filter() - Build filter with user-defined threshold.
+#
+# Check for:
+# 1. __threshold__;
+# 2. __threshold_value__ & __threshold_operator__;
+# 3. __condition__["threshold"] & __condition__["operator"];
+#
+# [Returns]
+#     Returns the filter string.
+# ========================================================================
+def __make_cond_filter() {
+	th_opt = ">=";
+
+	if is_num(__threshold__) {
+		th_value = __threshold__;
+	} else if is_num(__threshold_value__) {
+		th_value = __threshold_value__;
+		if __threshold_operator__ {
+			th_opt = __threshold_operator__;
+		}
+	} else if __condition__ {
+		if !is_num(__condition__["threshold"]) {
+			error("__condition__['threshold'] not found");
+		}
+
+		th_value = __condition__["threshold"];
+		if __condition__["operator"] {
+			th_opt = __condition__["operator"];
+		}
+	} else {
+		error("'__threshold__' or '__threshold_value__' or '__condition__' not found");
+	}
+
+	return "%(__metric_name__) %(th_opt) %(th_value)";
+}
+
+
+# ========================================================================
+# __query_last() - Query current data.
+#
+# [Arguments]
+#     result: The result of prev step.
+#     args:   Arguments configured in function call-list.
+#
+# [Returns]
+#     Returns the alerting result for next step.
+# ========================================================================
+def __query_last(result, args) {
+	__query_range__  = "last(%(__range__))";
+
+	# Query current data.
+	result = __query(__make_cond_filter());
+	if is_str(__result_filter__) && __result_filter__ != "" {
+		result = item_filter(result, __result_filter__);
+	}
+
+	# Output alerting.
+	__level__  = args["level"] ? args["level"] : "INFO";
+	return __alert(result);
+}
+
+
+# ========================================================================
+# __query_hisdata() - Query history data.
+#
+# [Arguments]
+#     result: The result of prev step.
+#     args:   Arguments configured in function call-list.
+#
+# [Returns]
+#     Returns the alerting result for next step.
+# ========================================================================
+def __query_hisdata(result, args) {
+	if !__hisdata_enable__ { return result; }
+	if len(result) == 0    { return result; }
+
+	result = slice(sort_r(result, __metric_name__), 0, __hisdata_topn__);
+
+	__query_range__   = __hisdata_range__;
+	__query_filter__  = __make_filter(result, __buckets__);
+	__factor__        = is_num(__hisdata_factor__) ? __hisdata_factor__ : 1.0;
+
+	hisdata = __query("%(__metric_name__) > 0");
+	if len(hisdata) > 0 {
+		result = __check_alert(result, hisdata);
+	} else {
+		item_set(result, __metric_name__ + "_refer", 0);
+		item_set(result, "refer_factor", __factor__);
+	}
+
+	__level__ = args["level"] ? args["level"] : "WARNING";
+	__ext_fields__ = [ __metric_name__ + "_refer", "refer_factor" ];
+	return __alert(result);
+}
+
+
+# ========================================================================
+# __func_list() - Returns the function call-list.
+# ========================================================================
+def __func_list() {
+	if is_str(__leveltype__) && __leveltype__ != "" {
+		return [
+			{ "name": "__query_last",    "args": { "level": __leveltype__ } },
+			{ "name": "__query_hisdata", "args": { "level": __leveltype__ } }
+		];
+	}
+
+	return [
+		{ "name": "__query_last",    "args": { "level": "INFO" } },
+		{ "name": "__query_hisdata", "args": { "level": "WARNING" } }
+	];
+}
+

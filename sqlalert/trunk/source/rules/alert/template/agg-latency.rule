@@ -1,0 +1,118 @@
+# ########################################################################
+# This file define the rule template of latency.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+include "alert/template/base/threshold-hisdata.rule";
+
+
+# ========================================================================
+# Supported metric.
+# ========================================================================
+__dict_metric__ = {
+	"tcp_latency_sip_max": { "name": "client_latency", "filter": "client_latency > 1" },
+	"tcp_latency_sip_min": { "name": "client_latency", "filter": "client_latency > 1" },
+	"tcp_latency_sip_avg": { "name": "client_latency", "filter": "client_latency > 1" },
+
+	"tcp_latency_dip_max": { "name": "server_latency", "filter": "server_latency > 1" },
+	"tcp_latency_dip_min": { "name": "server_latency", "filter": "server_latency > 1" },
+	"tcp_latency_dip_avg": { "name": "server_latency", "filter": "server_latency > 1" },
+
+	"tcp_latency_all_max": { "name": "client_latency + server_latency", "filter": "client_latency > 1 AND server_latency > 1" },
+	"tcp_latency_all_min": { "name": "client_latency + server_latency", "filter": "client_latency > 1 AND server_latency > 1" },
+	"tcp_latency_all_avg": { "name": "client_latency + server_latency", "filter": "client_latency > 1 AND server_latency > 1" },
+
+	"http_latency_all_max": { "name": "latency", "filter": "latency > 1" },
+	"http_latency_all_min": { "name": "latency", "filter": "latency > 1" },
+	"http_latency_all_avg": { "name": "latency", "filter": "latency > 1" }
+};
+
+
+# ========================================================================
+# Extend metric name for each supported metric.
+# ========================================================================
+__dict_ext_metric__ = {
+	"max": [ "latency_avg", "latency_min" ],
+	"min": [ "latency_avg", "latency_max" ],
+	"avg": [ "latency_min", "latency_max" ]
+};
+
+
+# ========================================================================
+# Returns the prefix of each index.
+# ========================================================================
+def __get_prefix() {
+	if __index__ == "tcp-*"  { return "tcp"; }
+	if __index__ == "http-*" { return "http"; }
+
+	error("Latency metric '%(__metric__)' for '%(__index__)' not supported");
+}
+
+
+# ========================================================================
+# Returns the suffix of each metric.
+# ========================================================================
+def __get_suffix() {
+	if has_suffix(__metric__, "max") { return "max"; }
+	if has_suffix(__metric__, "min") { return "min"; }
+	if has_suffix(__metric__, "avg") { return "avg"; }
+
+	error("Latency metric '%(__metric__)' for '%(__index__)' not supported");
+}
+
+
+# ========================================================================
+# Returns the supported metric.
+# ========================================================================
+def __get_metric() {
+	metric = __dict_metric__[__get_prefix() + "_" + __metric__];
+	if !metric {
+		error("__metric__ (%(__metric__)) not found");
+	}
+
+	name = metric["name"]; filter = metric["filter"]; suffix = __get_suffix();
+	return {
+		"alias":  "latency_%(suffix)",
+		"ext":    __dict_ext_metric__[suffix],
+		"filter": filter,
+		"metric": [
+			"MAX(%(name)) AS latency_max",
+			"MIN(%(name)) AS latency_min",
+			"AVG(%(name)) AS latency_avg",
+			"SUM(flow)    AS flows"
+		]
+	};
+}
+
+
+# ========================================================================
+# main() - Entry of the rule.
+# ========================================================================
+def main() {
+	metric = __get_metric();
+
+	# Setup global variable used by template.
+	__query_index__   = __index__;
+	__query_metrics__ = metric["metric"];
+	__metric_name__   = metric["alias"];
+	__query_stat__    = "1m";
+	__query_func__    = "query";
+	__agg_items__     = "max";
+
+	__ext_metric_fields__ = metric["ext"];
+	__ext_metric_fields__ = append(__ext_metric_fields__, "flows");
+	if is_list(__sql_filter__) {
+		__sql_filter__ = append(__sql_filter__, metric["filter"]);
+	} else {
+		__sql_filter__ = [ metric["filter"] ];
+	}
+
+	if is_num(__count_min__) {
+		__result_filter__ = "flows >= %(__count_min__)";
+	}
+
+	# Call the function list.
+	check_cfg();
+	return call_list(__func_list());
+}
+

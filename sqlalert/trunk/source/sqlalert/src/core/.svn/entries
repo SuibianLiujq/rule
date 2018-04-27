@@ -1,0 +1,61 @@
+10
+
+dir
+1614
+svn://192.168.0.66/src/alert/sqlalert/trunk/src/core
+svn://192.168.0.66
+
+
+
+2018-03-07T05:58:55.373840Z
+1494
+lidan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64af2b4f-4182-472f-a6fd-33aaade19a08
+
+logger
+dir
+
+sql
+dir
+
+tools
+dir
+
+script
+dir
+
+email
+dir
+
+json
+dir
+
+scanner
+dir
+
+options
+dir
+
+value
+dir
+
+funcs
+dir
+
+sys
+dir
+

@@ -1,0 +1,26 @@
+# This file defines the levels of alert.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configuration of levels.
+#
+# __levels_field__ - Filed name of level.
+# __levels_def_desc__ - Default level value of un-matched levels.
+__levels_field__     = "level";
+__levels_def_level__ = "NORMAL";
+__levels_def_desc__  = "未定义";
+
+
+# Descriptions of all levels.
+#
+# @desc:  Level description.
+# @color: Highlight color.
+__levels_dict__      = {
+	"NORMAL":    { "desc": "正常" },
+	"WARNING":   { "desc": "告警", "color": "blue"   },
+	"CRITICAL":  { "desc": "严重", "color": "gold"   },
+	"EMERGENCY": { "desc": "紧急", "color": "orange" },
+	"ERROR":     { "desc": "错误", "color": "red"    }
+};
+

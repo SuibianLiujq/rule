@@ -1,0 +1,31 @@
+# This file defines the rule(rule) to detect IPSCAN event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# SQL statements.
+#
+# Query all packets of all itap nodes.
+__sql__ = "
+	SELECT
+		count(UNIQUE dip) AS count_dip
+	FROM  'tcp-*'
+	WHERE
+		last(%(range)) AND timeout_state_num = 1
+	GROUP BY
+		date_histogram(1m) AS @timestamp,
+		node,
+		sip,
+		dport
+	ORDER BY
+		count_dip DESC
+";
+
+
+# exec_rule() - Execute the rule and returns the result.
+#
+# @k_count: Threshold of count of dport.
+def exec_rule(k_count) {
+	return query_avgby_num(__sql__, 60, "count_dip >= k_count");
+}
+

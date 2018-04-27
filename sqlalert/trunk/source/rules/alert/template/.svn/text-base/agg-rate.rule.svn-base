@@ -1,0 +1,177 @@
+# ########################################################################
+# This file define the rule template of xxx rate.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+include "alert/template/base/threshold-hisdata.rule";
+
+
+# ========================================================================
+# Supported xxx rate in TCP layer.
+# ========================================================================
+__rates_tcp__ = {
+	"retransmit_rate": {
+		"metric": [
+			"SUM(retransmit_in + retransmit_out) AS retransmit_rate",
+			"SUM(inpacket + outpacket)           AS packets"
+		],
+		"alias":    "retransmit_rate",
+		"filter":   "inpacket + outpacket > 0",
+		"dividend": "packets"
+	},
+
+	"retransmit_rate_in": {
+		"metric": [
+			"SUM(retransmit_in) AS retransmit_rate",
+			"SUM(inpacket)      AS packets_in"
+		],
+		"alias":    "retransmit_rate",
+		"filter":   "inpacket > 0",
+		"dividend": "packets_in"
+	},
+
+	"retransmit_rate_out": {
+		"metric": [
+			"SUM(retransmit_out) AS retransmit_rate",
+			"SUM(outpacket)      AS packets_out"
+		],
+		"alias":    "retransmit_rate",
+		"filter":   "outpacket > 0",
+		"dividend": "packets_out"
+	},
+
+	"ooo_rate": {
+		"metric": [
+			"SUM(oo_order_in + oo_order_out) AS ooo_rate",
+			"SUM(inpacket + outpacket)       AS packets"
+		],
+		"alias":    "ooo_rate",
+		"filter":   "inpacket + outpacket > 0",
+		"dividend": "packets"
+	},
+
+	"ooo_rate_in": {
+		"metric": [
+			"SUM(oo_order_in) AS ooo_rate",
+			"SUM(inpacket)    AS packets_in"
+		],
+		"alias":    "ooo_rate",
+		"filter":   "inpacket > 0",
+		"dividend": "packets_in"
+	},
+
+	"ooo_rate_out": {
+		"metric": [
+			"SUM(oo_order_out) AS ooo_rate",
+			"SUM(outpacket)    AS packets_out"
+		],
+		"alias":    "ooo_rate",
+		"filter":   "outpacket > 0",
+		"dividend": "packets_out"
+	},
+
+	"flows_anomaly": {
+		"metric": [
+			"SUM(timeout_state_num == 8 ? 0 : 1) AS flows_anomaly",
+			"SUM(flow)                           AS flows"
+		],
+		"alias":    "flows_anomaly",
+		"filter":   "flow > 0",
+		"dividend": "flows"
+	}
+};
+
+
+# ========================================================================
+# Supported xxx rate in HTTP layer.
+# ========================================================================
+__rates_http__ = {
+	"status_error_rate": {
+		"metric": [
+			"SUM(status < 400 ? 0 : flow) AS error_rate",
+			"SUM(flow)                     AS requests"
+		],
+		"alias": "error_rate",
+		"filter": "flow > 0",
+		"dividend": "requests"
+	}
+};
+
+
+# ========================================================================
+# Supported xxx rate in DNS layer.
+# ========================================================================
+__rates_dns__ = {
+	"retcode_error_rate": {
+		"metric": [
+			"SUM(retcode == 0 ? 0 : flow) AS error_rate",
+			"SUM(flow)                    AS flows"
+		],
+		"alias": "error_rate",
+		"filter": "isresponse = 1 AND flow > 0",
+		"dividend": "flows"
+	}
+};
+
+
+# ========================================================================
+# Supported metrics.
+# ========================================================================
+__dict_metric__ = {
+	"tcp-*":  __rates_tcp__,
+	"http-*": __rates_http__,
+	"dns-*":  __rates_dns__
+};
+
+
+# ========================================================================
+# Returns supported metric.
+# ========================================================================
+def __get_metric() {
+	if !__index__ || !is_str(__index__) {
+		error("__index__ not found!");
+	}
+
+	metric = __dict_metric__[__index__];
+	if !metric {
+		error("metric '%(__metric__)' not found for index '%(__index__)'");
+	}
+
+	metric = metric[__metric__];
+	if !metric {
+		error("metric '%(__metric__)' not found for index '%(__index__)'");
+	}
+
+	return metric;
+}
+
+
+# ========================================================================
+# main() - Entry of the rule.
+# ========================================================================
+def main() {
+	metric = __get_metric();
+
+	# Setup global variable used by template.
+	__query_index__   = __index__;
+	__query_metrics__ = metric["metric"];
+	__metric_name__   = metric["alias"];
+	__query_stat__    = "1m";
+	__query_func__    = "query_avgby_field";
+	__agg_items__     = "max";
+	__query_arg__     = metric["dividend"];
+
+	__ext_metric_fields__ = [ metric["dividend"] ];
+	__result_filter__     = "%(__query_arg__) >= %(__count_min__)";
+
+	if is_list(__sql_filter__) {
+		__sql_filter__ = append(__sql_filter__, metric["filter"]);
+	} else {
+		__sql_filter__ = [ metric["filter"] ];
+	}
+
+	# Call the function list.
+	check_cfg();
+	return call_list(__func_list());
+}
+

@@ -1,0 +1,39 @@
+# ########################################################################
+# This file define the gloal configuration for Chinese language.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>.
+# ########################################################################
+
+
+# ========================================================================
+# Footer message of the sending emails.
+#
+# Strings in the list will be joined by " " and formated with html.
+# ========================================================================
+__email_footer_msgs__ = [
+	"This email is automatically sent by SQLAlert, please DO NOT reply",
+	"this email. Please contact with the administrator if you are not",
+	"expected to receive this email. Thanks!"
+];
+
+
+# ========================================================================
+# Title (or Name) of the email descriptions.
+# ========================================================================
+__email_desc_type__    = "Type";
+__email_desc_subtype__ = "Desc";
+__email_desc_level__   = "Level";
+__email_desc_time__    = "Time";
+__email_desc_action__  = "Action";
+__email_desc_detail__  = "Details";
+
+
+# ========================================================================
+# Description of alerting levels.
+# ========================================================================
+__levels_all__      = {
+	"INFO":     { "name": "INFO",     "desc": "Info",     "color": "blue"   },
+	"WARNING":  { "name": "WARNING",  "desc": "Warning",  "color": "orange" },
+	"CRITICAL": { "name": "CRITICAL", "desc": "Critical", "color": "red"    }
+};
+	

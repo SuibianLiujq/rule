@@ -1,0 +1,49 @@
+# This file defines the rule(cfg) to detec NEW_PROTO event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range - Time range to detect from the past to now.
+# k_Bps - Threshold of Bps.
+# k_pps - Threshold of pps.
+range     = "5m";
+protocols = [ "TCP", "UDP", "ICMP", "IGMP" ];
+k_Bps     = 0; 
+k_pps     = 0;
+
+
+# Configration of output.
+#
+# output    - Output method of alert result.
+#             "es":    Insert result back to ES server.
+#             "email": Send result to email server.
+# subtype   - Sub-type of alert result.
+# sendto    - Type to select the email address.
+#             "all":   Owners and administrators.
+#             "owner": Owners only.
+#             "admin": Administrators only.
+# level     - Alert level.
+# levels    - Level list to map the level.
+output  = "email";
+subtype = "NEW_PROTO";
+sendto  = is_str(__sendto__) ? __sendto__ : "all";
+level   = "WARNING";
+level_list = [
+	{ "level": "WARNING",   "Bps": 1  *  B, "pps": 1 },
+	{ "level": "CRITICAL",  "Bps": 1  * MB, "pps": 5000 },
+	{ "level": "EMERGENCY", "Bps": 2  * MB, "pps": 50000 },
+	{ "level": "ERROR",     "Bps": 10 * MB, "pps": 500000 }
+];
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+title        = "L3 (IP) 过去 " + range + " 内, 发现不在" + join(protocols, ", ") + " 内的新协议";
+desc_type    = "L3 (IP) 协议监控.";
+desc_subtype = "Bps > " + fmt_bytes(k_Bps) + " 或者 pps > " + k_pps;
+

@@ -1,0 +1,483 @@
+#
+found_list = [
+{
+"domain": "mts.lakala.com",
+"alias": "mts.sub.lakala.com",
+"@timestamp": "2017-06-15T23:11:35.998+08:00",
+"hit": "mts.lakala.com"
+},
+{
+"alias": "open.sub.lakala.com",
+"@timestamp": "2017-06-15T23:07:13.347+08:00",
+"hit": "open.lakala.com",
+"domain": "open.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:04:42.219+08:00",
+"hit": "spi.lakala.com",
+"domain": "spi.lakala.com",
+"alias": "spi.sub.lakala.com"
+},
+{
+"alias": "weixin.sub.lakala.com",
+"@timestamp": "2017-06-15T23:37:31.537+08:00",
+"hit": "weixin.lakala.com",
+"domain": "weixin.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:37:31.537+08:00",
+"hit": "weixin.lakala.com",
+"domain": "weixin.lakala.com",
+"alias": "fx.sub.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:08:11.910+08:00",
+"hit": "netpay.lakala.com",
+"domain": "netpay.lakala.com",
+"alias": "netpay.sub.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:02:48.626+08:00",
+"hit": "mpos.lakala.com",
+"domain": "oauth.lakala.com",
+"alias": "mpos.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:02:48.626+08:00",
+"hit": "mpos.lakala.com",
+"domain": "api.lakala.com",
+"alias": "mpos.lakala.com"
+},
+{
+"hit": "ips.lakala.com",
+"domain": "ips.lakala.com",
+"alias": "ips.sub.lakala.com",
+"@timestamp": "2017-06-15T23:05:54.693+08:00"
+},
+{
+"domain": "jr.lakala.com",
+"alias": "jr.sub.lakala.com",
+"@timestamp": "2017-06-15T23:07:22.420+08:00",
+"hit": "jr.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:12:13.422+08:00",
+"hit": "mpos.lakala.com",
+"domain": "mpos.lakala.com",
+"alias": "mpos.sub.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:50:58.338+08:00",
+"hit": "www.paygate.cn",
+"domain": "b.lakala.com",
+"alias": "www.paygate.cn"
+},
+{
+"@timestamp": "2017-06-15T23:25:45.269+08:00",
+"hit": "pay.lakala.com",
+"domain": "pay.lakala.com",
+"alias": "user.lakala.com"
+},
+{
+"alias": "qy.sub.lakala.com",
+"@timestamp": "2017-06-15T23:51:24.115+08:00",
+"hit": "qy.lakala.com",
+"domain": "qy.lakala.com"
+},
+{
+"hit": "s.lakala.com",
+"domain": "s.lakala.com",
+"alias": "s.sub.lakala.com",
+"@timestamp": "2017-06-15T23:04:13.177+08:00"
+},
+{
+"domain": "tsm.lakala.com",
+"alias": "tsm.sub.lakala.com",
+"@timestamp": "2017-06-15T23:00:49.798+08:00",
+"hit": "tsm.lakala.com"
+},
+{
+"alias": "user.lakala.com",
+"@timestamp": "2017-06-15T23:06:05.079+08:00",
+"hit": "user.lakala.com",
+"domain": "update.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:11:00.174+08:00",
+"hit": "user.lakala.com",
+"domain": "user.lakala.com",
+"alias": "user.sub.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:12:39.872+08:00",
+"hit": "s.lakala.com",
+"domain": "s.lakala.com",
+"alias": "s.sub.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:11:00.840+08:00",
+"hit": "shop.lakala.com",
+"domain": "shop.lakala.com",
+"alias": "shop.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:51:02.163+08:00",
+"hit": "kbapi.lakala.com",
+"domain": "kbapi.lakala.com",
+"alias": "kbapi.sub.lakala.com"
+},
+{
+"alias": "dmtqz.sub.lakala.com",
+"@timestamp": "2017-06-15T23:16:13.905+08:00",
+"hit": "dmtqz.lakala.com",
+"domain": "dmtqz.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:07:37.888+08:00",
+"hit": "mall.lakala.com",
+"domain": "mall.lakala.com",
+"alias": "mall.sub.mylakala.com"
+},
+{
+"alias": "dc.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:00:48.792+08:00",
+"hit": "dc.lakala.com",
+"domain": "dc.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:04:47.893+08:00",
+"hit": "paymax.lakala.com",
+"domain": "paymax.lakala.com",
+"alias": "paymax.sub.mylakala.com"
+},
+{
+"alias": "ipos.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:00:47.634+08:00",
+"hit": "ipos.lakala.com",
+"domain": "ipos.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:00:00.228+08:00",
+"hit": "h5.lakala.com",
+"domain": "h5.lakala.com",
+"alias": "h5.sub.mylakala.com"
+},
+{
+"alias": "mposc.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:04:08.222+08:00",
+"hit": "mposc.lakala.com",
+"domain": "mposc.lakala.com"
+},
+{
+"hit": "zxkf.lakala.com",
+"domain": "zxkf.lakala.com",
+"alias": "zxkf.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:25:35.684+08:00"
+},
+{
+"domain": "www.lakala.com",
+"alias": "www.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:00:35.695+08:00",
+"hit": "www.lakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:34:52.940+08:00",
+"hit": "map.lakala.com",
+"domain": "map.lakala.com",
+"alias": "map.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:09:38.272+08:00",
+"hit": "hbyx7.lakala.com",
+"domain": "hbyx7.lakala.com",
+"alias": "hbyx7.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:04:35.589+08:00",
+"hit": "nb.lakala.com",
+"domain": "nb.lakala.com",
+"alias": "nb.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:09:13.972+08:00",
+"hit": "jz.lakala.com",
+"domain": "jz.lakala.com",
+"alias": "jz.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:04:08.222+08:00",
+"hit": "mposc.lakala.com",
+"domain": "mposc.lakala.com",
+"alias": "mposc.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-15T23:28:13.203+08:00",
+"hit": "zxkf.lakala.com",
+"domain": "zxkf.lakala.com",
+"alias": "zxkf.sub.mylakala.com"
+},
+{
+"hit": "www.lakala.com",
+"domain": "www.lakala.com",
+"alias": "www.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:18:35.910+08:00"
+},
+{
+"domain": "hbyx7.lakala.com",
+"alias": "hbyx7.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:02:25.866+08:00",
+"hit": "hbyx7.lakala.com"
+},
+{
+"alias": "nb.sub.mylakala.com",
+"@timestamp": "2017-06-15T23:12:00.052+08:00",
+"hit": "nb.lakala.com",
+"domain": "nb.lakala.com"
+},
+{
+"hit": "mp.lakala.com.cn",
+"domain": "mp.lakala.com.cn",
+"alias": "mp.sub1.lakala.com.cn",
+"@timestamp": "2017-06-15T23:24:02.455+08:00"
+},
+{
+"domain": "ms.lakala.com.cn",
+"alias": "ms.sub1.lakala.com.cn",
+"@timestamp": "2017-06-15T23:11:00.430+08:00",
+"hit": "ms.lakala.com.cn"
+},
+{
+"@timestamp": "2017-06-15T23:15:37.473+08:00",
+"hit": "pgs.lakala.com.cn",
+"domain": "pgs.lakala.com.cn",
+"alias": "pgs.sub1.lakala.com.cn"
+},
+{
+"@timestamp": "2017-06-15T23:25:57.769+08:00",
+"hit": "report.lakala.com.cn",
+"domain": "report.lakala.com.cn",
+"alias": "report.sub.lakala.com.cn"
+},
+{
+"@timestamp": "2017-06-15T23:09:05.376+08:00",
+"hit": "cpms.kaolazhengxin.com",
+"domain": "cpms.kaolazhengxin.com",
+"alias": "cpms.sub.kaolazhengxin.com"
+},
+{
+"alias": "crcp.sub.kaolazhengxin.com",
+"@timestamp": "2017-06-15T23:01:09.332+08:00",
+"hit": "crcp.kaolazhengxin.com",
+"domain": "crcp.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-15T23:13:20.995+08:00",
+"hit": "fw.kaolazhengxin.com",
+"domain": "fw.kaolazhengxin.com",
+"alias": "fw.sub.kaolazhengxin.com"
+},
+{
+"domain": "m.kaolazhengxin.com",
+"alias": "m.sub.kaolazhengxin.com",
+"@timestamp": "2017-06-15T23:23:00.968+08:00",
+"hit": "m.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-15T23:04:15.001+08:00",
+"hit": "access.kaolazhengxin.com",
+"domain": "access.kaolazhengxin.com",
+"alias": "access.sub.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-15T23:05:23.656+08:00",
+"hit": "mci.kaolazhengxin.com",
+"domain": "mci.kaolazhengxin.com",
+"alias": "mci.sub.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-15T23:12:38.369+08:00",
+"hit": "mcim.kaolazhengxin.com",
+"domain": "mcim.kaolazhengxin.com",
+"alias": "mcim.sub.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-15T23:13:00.253+08:00",
+"hit": "www.kaolazhengxin.com",
+"domain": "www.kaolazhengxin.com",
+"alias": "www.sub.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-15T23:58:54.883+08:00",
+"hit": "zyzx.kaolazhengxin.com",
+"domain": "zyzx.kaolazhengxin.com",
+"alias": "zyzx.sub.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-16T00:03:51.378+08:00",
+"hit": "qr.lakala.com",
+"domain": "qr.lakala.com",
+"alias": "qr.sub.lakala.com"
+},
+{
+"hit": "mwork.lakala.com",
+"domain": "mwork.lakala.com",
+"alias": "mwork.sub.mylakala.com",
+"@timestamp": "2017-06-16T00:26:52.148+08:00"
+},
+{
+"@timestamp": "2017-06-16T00:40:28.718+08:00",
+"hit": "mer.lakala.com",
+"domain": "mer.lakala.com",
+"alias": "mer.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-16T00:19:09.457+08:00",
+"hit": "ocsp.lakala.com",
+"domain": "ocsp.lakala.com",
+"alias": "ocsp.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-16T00:40:28.718+08:00",
+"hit": "mer.lakala.com",
+"domain": "mer.lakala.com",
+"alias": "mer.sub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-16T00:08:19.366+08:00",
+"hit": "cloud.kaolazhengxin.com",
+"domain": "cloud.kaolazhengxin.com",
+"alias": "cloud.sub.kaolazhengxin.com"
+},
+{
+"domain": "intl.lakala.com",
+"alias": "intl.sub.lakala.com",
+"@timestamp": "2017-06-16T01:05:10.740+08:00",
+"hit": "intl.lakala.com"
+},
+{
+"alias": "ypos.sub.mylakala.com",
+"@timestamp": "2017-06-16T01:13:42.936+08:00",
+"hit": "ypos.lakala.com",
+"domain": "ypos.lakala.com"
+},
+{
+"@timestamp": "2017-06-16T01:59:34.638+08:00",
+"hit": "mobile.lakala.com",
+"domain": "mobile.lakala.com",
+"alias": "mobile.sub.mylakala.com"
+},
+{
+"alias": "ypos.sub.mylakala.com",
+"@timestamp": "2017-06-16T01:13:47.750+08:00",
+"hit": "ypos.lakala.com",
+"domain": "ypos.lakala.com"
+},
+{
+"@timestamp": "2017-06-16T01:45:47.318+08:00",
+"hit": "count.lakala.com.cn",
+"domain": "count.lakala.com.cn",
+"alias": "count.sub1.lakala.com.cn"
+},
+{
+"alias": "zc.sub.mylakala.com",
+"@timestamp": "2017-06-16T02:45:21.427+08:00",
+"hit": "zc.lakala.com",
+"domain": "zc.lakala.com"
+},
+{
+"hit": "jzlq.lakala.com",
+"domain": "jzlq.lakala.com",
+"alias": "jzlq.sub.mylakala.com",
+"@timestamp": "2017-06-16T02:12:10.599+08:00"
+},
+{
+"@timestamp": "2017-06-16T02:45:21.427+08:00",
+"hit": "zc.lakala.com",
+"domain": "zc.lakala.com",
+"alias": "zc.sub.mylakala.com"
+},
+{
+"domain": "shouhuan.lakala.com",
+"alias": "shouhuan.sub.lakala.com",
+"@timestamp": "2017-06-16T03:25:45.574+08:00",
+"hit": "shouhuan.lakala.com"
+},
+{
+"@timestamp": "2017-06-16T03:12:20.768+08:00",
+"hit": "qyzx.kaolazhengxin.com",
+"domain": "qyzx.kaolazhengxin.com",
+"alias": "qyzx.sub.kaolazhengxin.com"
+},
+{
+"@timestamp": "2017-06-16T04:08:28.656+08:00",
+"hit": "oms.mylakala.com",
+"domain": "oms.mylakala.com",
+"alias": "oms.mysub.mylakala.com"
+},
+{
+"@timestamp": "2017-06-16T05:29:11.770+08:00",
+"hit": "kb.sub.mylakala.com",
+"domain": "kb.lakala.com",
+"alias": "kb.sub.mylakala.com"
+},
+{
+"alias": "weihu.sub.mylakala.com",
+"@timestamp": "2017-06-16T07:52:13.925+08:00",
+"hit": "weihu.lakala.com",
+"domain": "weihu.lakala.com"
+},
+{
+"hit": "qm.sub.mylakala.com",
+"domain": "qm.lakala.com",
+"alias": "qm.sub.mylakala.com",
+"@timestamp": "2017-06-16T07:23:11.893+08:00"
+},
+{
+"@timestamp": "2017-06-16T07:52:13.925+08:00",
+"hit": "weihu.lakala.com",
+"domain": "weihu.lakala.com",
+"alias": "weihu.sub.mylakala.com"
+},
+{
+"domain": "95555hx.lakala.com.cn",
+"alias": "95555hx.sub.lakala.com.cn",
+"@timestamp": "2017-06-16T11:07:59.083+08:00",
+"hit": "95555hx.lakala.com.cn"
+},
+{
+"alias": "wkqs.sub.lakala.com.cn",
+"@timestamp": "2017-06-16T14:31:19.955+08:00",
+"hit": "wkqs.lakala.com.cn",
+"domain": "wkqs.lakala.com.cn"
+},
+{
+"@timestamp": "2017-06-16T20:32:09.028+08:00",
+"hit": "mgw.lakala.com",
+"domain": "mgw.lakala.com",
+"alias": "mgw.sub.lakala.com"
+},
+{
+"@timestamp": "2017-06-14T23:16:23.226+08:00",
+"hit": "iba.lakala.com.cn",
+"domain": "iba.lakala.com.cn",
+"alias": "iba.sub1.lakala.com.cn"
+},
+{
+"@timestamp": "2017-06-15T10:08:20.858+08:00",
+"hit": "bmfk.lakala.com.cn",
+"domain": "bmfk.lakala.com.cn",
+"alias": "bmfk.sub.lakala.com.cn"
+},
+{
+"hit": "gjs.sub.lakala.com",
+"domain": "gjs.lakala.com",
+"alias": "gjs.sub.lakala.com",
+"@timestamp": "2017-06-14T16:38:41.820+08:00"
+},
+{
+"@timestamp": "2017-06-13T14:05:36.404+08:00",
+"hit": "debt.kaolazhengxin.com",
+"domain": "debt.kaolazhengxin.com",
+"alias": "debt.sub.kaolazhengxin.com"
+}
+];

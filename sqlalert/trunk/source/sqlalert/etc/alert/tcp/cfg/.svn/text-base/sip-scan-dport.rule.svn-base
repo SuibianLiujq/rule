@@ -1,0 +1,46 @@
+# This file defines the rule(cfg) to detec NODATA event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range   - Time range to detect from the past to now.
+# k_count - Threshold of dport count per second.
+range   = "5m";
+k_count = 1;
+
+
+# Configration of output.
+#
+# output     - Output method of alert result.
+#              "es":    Insert result back to ES server.
+#              "email": Send result to email server.
+# subtype    - Sub-type of alert result.
+# sendto     - Type to select the email address.
+#              "all":   Owners and administrators.
+#              "owner": Owners only.
+#              "admin": Administrators only.
+# level      - Alert level.
+# level_list - Level list to map the level.
+output  = "email";
+subtype = "PORT_SCAN";
+sendto  = is_str(__sendto__) ? __sendto__ : "all";
+level   = "EMERGENCY";
+level_list = [
+	{ "level": "WARNING",   "count_dport": 1 },
+	{ "level": "CRITICAL",  "count_dport": 10 },
+	{ "level": "EMERGENCY", "count_dport": 30 },
+	{ "level": "ERROR",     "count_dport": 100 }
+];
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+title        = "L4 (TCP) 端口扫描";
+desc_type    = "L4 (TCP) 连接数监控.";
+desc_subtype = "sip 向 dip 的不同端口号发起连接且超时, 每秒访问的端口个数大于等于 " + k_count;
+

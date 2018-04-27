@@ -1,0 +1,48 @@
+# This file defines the rule(cfg) to detect SERVERS_WHITELIST event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range     - Time range to detect from the past to now.
+# whitelist - Whitelist of DSN servers.
+range   = "5m";
+whitelist = [
+	"8.8.8.8",
+	"8.8.4.4",
+	"114.114.114.114",
+	"180.76.76.76",
+	"192.168.0.254",
+	"192.168.0.1"
+];
+
+
+# Configration of output.
+#
+# output     - Output method of alert result.
+#              "es":    Insert result back to ES server.
+#              "email": Send result to email server.
+# subtype    - Sub-type of alert result.
+# sendto     - Type to select the email address.
+#              "all":   Owners and administrators.
+#              "owner": Owners only.
+#              "admin": Administrators only.
+# level      - Alert level.
+# level_list - Level list to map the level.
+output  = "email";
+subtype = "SERVERS_WHITELIST";
+#sendto  = is_str(__sendto__) ? __sendto__ : "all";
+sendto = "admin";
+level   = "WARNING";
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+title        = "DNS 服务器白名单";
+desc_type    = "DNS 请求监控.";
+desc_subtype = "sip 向不在 " + join(whitelist, ", ") + " 内的服务器发出 DNS 请求";
+

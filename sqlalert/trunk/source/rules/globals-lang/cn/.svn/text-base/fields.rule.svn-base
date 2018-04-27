@@ -1,0 +1,82 @@
+# ########################################################################
+# This file defines the configuration of description of fields.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# SQLAlert will replace the field name with "desc" while sending emails
+# and do some formating depends on "fmt".
+# ========================================================================
+__fields_all__ = {
+	"@timestamp":      { "desc": "时间戳"       },
+	"node":            { "desc": "iTAP 节点"    },
+	"level":           { "desc": "等级"         },
+	"ip":              { "desc": "IP 地址"      },
+	"sip":             { "desc": "源 IP 地址"   },
+	"sport":           { "desc": "源端口号"     },
+	"dip":             { "desc": "目的 IP 地址" },
+	"dport":           { "desc": "目的端口号"   },
+	"status":          { "desc": "状态"         },
+	"index":           { "desc": "索引"         },
+	"protocol":        { "desc": "协议"         },
+	"url":             { "desc": "URL"          },
+	"owner":           { "desc": "责任人"       },
+	"domain":          { "desc": "域名"         },
+
+	"flow":            { "desc": "流个数",             "fmt": "int"   },
+	"flow_refer":      { "desc": "参考值 (流个数)",    "fmt": "int"   },
+	"flows":           { "desc": "流个数",             "fmt": "int"   },
+	"flows_refer":     { "desc": "参考值 (流个数)",    "fmt": "int"   },
+	"request":         { "desc": "请求数",             "fmt": "int"   },
+	"request_refer":   { "desc": "参考值 (请求数)",    "fmt": "int"   },
+	"requests":        { "desc": "请求数",             "fmt": "int"   },
+	"requests_refer":  { "desc": "参考值 (请求数)",    "fmt": "int"   },
+	"byte":            { "desc": "字节数",             "fmt": "bytes" },
+	"bytes":           { "desc": "字节数",             "fmt": "bytes" },
+	"inbytes":         { "desc": "输入字节数",         "fmt": "bytes" },
+	"outbytes":        { "desc": "输出字节数",         "fmt": "bytes" },
+	"bit":             { "desc": "比特数",             "fmt": "bits"  },
+	"bits":            { "desc": "比特数",             "fmt": "bits"  },
+	"Bps":             { "desc": "Bps (每秒字节数)",   "fmt": "bytes" },
+	"Bps_refer":       { "desc": "参考值 (Bps)",       "fmt": "bytes" },
+	"bps":             { "desc": "bps (每秒比特数)",   "fmt": "bits"  },
+	"bps_refer":       { "desc": "参考值 (bps)",       "fmt": "bits"  },
+	"pps":             { "desc": "pps (每秒包数)",     "fmt": "int"   },
+	"packets":         { "desc": "包数",               "fmt": "int"   },
+	"packets_in":      { "desc": "输入包数",           "fmt": "int"   },
+	"packets_out":     { "desc": "输出包数",           "fmt": "int"   },
+
+	"count":              { "desc": "个数",                      "fmt": "int" },
+	"count_ip":           { "desc": "IP 个数",                   "fmt": "int" },
+	"count_sip":          { "desc": "源 IP 个数",                "fmt": "int" },
+	"count_sport":        { "desc": "源端口个数",                "fmt": "int" },
+	"count_dip":          { "desc": "目的 IP 个数",              "fmt": "int" },
+	"count_dip_refer":    { "desc": "参考值 (目的 IP 个数)",     "fmt": "int" },
+	"count_dport":        { "desc": "目的端口个数",              "fmt": "int" },
+	"count_dport_refer":  { "desc": "参考值 (目的端口个数)",     "fmt": "int" },
+	"count_syn":          { "desc": "SYN 超时个数",              "fmt": "int" },
+	"count_syn_refer":    { "desc": "参考值 (SYN 超时个数)",     "fmt": "int" },
+	"count_syn_ack":      { "desc": "SYN+ACK 超时个数",          "fmt": "int" },
+
+	"latency":            { "desc": "延迟",                      "fmt": "time_us" },
+	"latency_refer":      { "desc": "参考值（延迟）",            "fmt": "time_us" },
+	"latency_max":        { "desc": "最大延迟",                  "fmt": "time_us" },
+	"latency_max_refer":  { "desc": "参考值（最大延迟）",        "fmt": "time_us" },
+	"latency_min":        { "desc": "最小延迟",                  "fmt": "time_us" },
+	"latency_min_refer":  { "desc": "参考值（最小延迟）",        "fmt": "time_us" },
+	"latency_avg":        { "desc": "平均延迟",                  "fmt": "time_us" },
+	"latency_avg_refer":  { "desc": "参考值（平均延迟）",        "fmt": "time_us" },
+
+	"retransmit_rate":        { "desc": "重传率",             "fmt": "percentage"},
+	"retransmit_rate_refer":  { "desc": "参考值（重传率）",   "fmt": "percentage"},
+	"ooo_rate":               { "desc": "乱序率",             "fmt": "percentage"},
+	"ooo_rate_refer":         { "desc": "参考值（乱序率）",   "fmt": "percentage"},
+
+	"duration":           { "desc": "持续时间",             "fmt": "time_us" },
+	"error_rate":         { "desc": "错误率",               "fmt": "percentage" },
+	"error_rate_refer":   { "desc": "参考值（错误率）",     "fmt": "percentage" },
+
+	"refer_factor":    { "desc": "参考系数",         "fmt": "float" }
+};

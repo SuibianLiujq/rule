@@ -1,0 +1,5 @@
+#
+
+name = 100.05;
+value = "my name is %(name)";
+print(value);

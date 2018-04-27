@@ -1,0 +1,26 @@
+# This file defines the iTAPs and the owners.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Descriptions of all iTAP nodes.
+#
+# @name: iTAP node name or a list.
+# @desc: iTAP node description.
+__itaps_def_desc__ = "未知";
+__itaps_descs__    = [
+	{ "name": "192.168.0.117", "desc": "iTAP-1" },
+	{ "name": "192.168.0.101", "desc": "iTAP-2" }
+];
+
+
+# Owners of all iTAP nodes.
+#
+# @name:  iTAP node name or a list.
+# @owner: iTAP node owner.
+__itaps_def_owner__ = "未知";
+__itaps_owners__    = [
+	{ "name": "192.168.0.117", "owner": "杨润达" },
+	{ "name": "192.168.0.101", "owner": "杨润达" }
+];
+

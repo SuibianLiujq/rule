@@ -1,0 +1,81 @@
+# This file define rule to output the alert result.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "cfg/emails.rule";
+include "cfg/fields.rule";
+include "cfg/itaps.rule";
+include "cfg/iplist.rule";
+include "cfg/levels.rule";
+
+
+# output_elastic() - Ouput alert result to ES server.
+#
+# @result: List of DICTs.
+def output_elastic(result) {
+	__level_type__ = "value";
+	levels_map(result, __level_list__, __level_keys__);
+
+	alert_es(result);
+}
+
+
+# output_email() - Output alert result from sending emails.
+#
+# @result: List of DICTs.
+# @fields: Fields to format.
+# @owners: Owners to send to.
+def output_email(result, fields, owners) {
+	__level_type__ = "desc";
+	levels_map(result, __level_list__, __level_keys__);
+
+	__email_title__  = title;
+	__email_fields__ = fields_get_list(fields);
+	__email_desc__   = [
+		{ "name": __emails_desc_type__,  "value": desc_type },
+		{ "name": __emails_desc_level__, "value": levels_get_desc(__level__) },
+		{ "name": __emails_desc_desc__,  "value": desc_subtype },
+		{ "name": __emails_desc_time__,  "value": time() },
+		{ }, # for newline.
+		{ "name": __emails_desc_detail__ }
+	];
+
+	if is_list(owners) {
+		__email_sendto__ = owners;
+	} else if owners == "ip" {
+		__email_sendto__ = iplist_get_emails(result, __owner_key__);
+		iplist_map(result, __owner_key__);
+	} else {
+		__email_sendto__ = itaps_get_emails(result, __owner_key__);
+		itaps_map(result, __owner_key__);
+	}
+
+	alert_email(result);
+}
+
+
+# output() - Send output rsult.
+#
+# @result: A list of DICTs.
+# @fields: Foramt fields (for emails).
+# @owners: Owners or key used to map owners.
+#
+# Globals:
+# __output__ - Output method: "es", "email" or "all".
+# __level__  - Alert level.
+def output(result, fields, owers) {
+	if __output__ == "all" || __output__ == "es" {
+		output_elastic(result);
+		output_flag = true;
+	}
+	
+	if __output__ == "all" || __output__ == "email" {
+		output_email(result, fields, owers);
+		output_flag = true;
+	}
+
+	if !output_flag {
+		print("---------------------- Alert --------------------------");
+		pprint(result);
+	}
+}
+

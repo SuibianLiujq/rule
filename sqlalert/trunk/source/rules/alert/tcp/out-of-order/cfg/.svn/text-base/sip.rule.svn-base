@@ -1,0 +1,52 @@
+# ########################################################################
+# This file defines the configuration of the rule.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Base configuration of alerting detection.
+#
+# __range__:     Time interval to detect.
+# __type__:      Alerting type.
+# __subtype__:   Sub-type of alerting.
+# __count_min__: Minimum count of flows.
+# __condition__: Alert-checking condition.
+# ========================================================================
+__range__     = "5m";
+__type__      = "TCP";
+__subtype__   = "OO_ORDER_RATE_SIP";
+__count_min__ = 1000;
+__condition__ = { "threshold": 0.5, "operator": ">=" };
+
+
+# ========================================================================
+# Configuration of History data.
+#
+# __hisdata_enable__: Enable history data checking.
+# __hisdata_topn__:   Check top-n records of alerting result.
+# __hisdata_range__:  Time interval to detect.
+# __hisdata_factor__: Comparision factor.
+# ========================================================================
+__hisdata_enable__ = true;
+__hisdata_topn__   = 10;
+__hisdata_range__  = "last_days(3, %(__range__))";
+__hisdata_factor__ = 1.5;
+
+
+# ========================================================================
+# Extend SQL filter.
+#
+# Status 1, 2, 3, 5, 6 not a complete TCP connection.
+# ========================================================================
+__sql_filter__ = [
+	"unknown_conn = 0"
+];
+
+
+# ========================================================================
+# Import the language-specific description.
+# ========================================================================
+import "alert/tcp/out-of-order/desc/%(__sys_lang__)/sip.rule";
+

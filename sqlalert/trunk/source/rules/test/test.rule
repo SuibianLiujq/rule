@@ -1,0 +1,8 @@
+# This is the test file of SQLAlert engine.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>.
+
+print(1/0);
+pprint(time());
+pprint(__fields_all__);
+

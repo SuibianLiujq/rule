@@ -1,0 +1,217 @@
+# ########################################################################
+# This file defines the configuration of SQLAlert engine and rule scripts.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Configration of language environment.
+#
+# Rule scripts use this value to support different language.
+# Use include keyword to import the language-specific configurations.
+# ========================================================================
+__sys_lang__ = "cn";
+
+include "globals-lang/%(__sys_lang__)/sys.rule";
+include "globals-lang/%(__sys_lang__)/fields.rule";
+
+
+# ========================================================================
+# Configuration of ES server address and port.
+#
+# __es_host_query__:  Server address of query data.
+# __es_host_insert__: Server address of outputing alert result.
+# ========================================================================
+__es_host__        = "localhost:9200";
+__es_host_query__  = __es_host__;
+__es_host_insert__ = __es_host__;
+
+
+# ========================================================================
+# Default values of ES client.
+#
+# __es_bucket_size__: Count of records to return of each bucket.
+# __es_order__:       Ordering type of each bucket.
+# __es_scripts__:     Script to use for SQL expressions.
+# __es_timeout__:     Timeout seconds for ES requests.
+# ========================================================================
+__es_bucket_size__ = 10;
+__es_order__       = "desc";
+__es_script__      = "painless";
+__es_timeout__     = 60;
+
+
+# ========================================================================
+# Name of alerting index.
+#
+# %Y - Number of years (4 digits).
+# %M - Number of months (2 digits).
+# %D - Number of days (2 digits).
+# ========================================================================
+__es_index_alert__ = { "index": "alert-%Y-%M-%D", "type": "netflow_v9" };
+
+
+# ========================================================================
+# Configuration of SMTP server.
+#
+# SQLAlert use this configuration to send emails for all output.
+# ========================================================================
+__email_smtp__ = {
+	"host": "mail.smtp.com",
+	"port": 25,
+	"SSL/TLS": true,
+	"address": "user@domain.com",
+	"password": "******"
+};
+
+
+# ========================================================================
+# Configuration of email address list.
+#
+# SQLAlert send all emails to the address in this list. Re-configure this
+# value if you want to send results to different people in your own rules.
+# ========================================================================
+__email_sendto__ = [
+	# Add email addresses here.
+];
+
+
+# ========================================================================
+# Configuration of footer message of emails.
+#
+# Messages are configured in "globals-lang/<lang>/sys.rule" file and the
+# variable key is __email_footer_msgs__.
+# ========================================================================
+__email_footer__ = '<small style="color: gray"><br /><br /><br />'
+				 + "---------------------------------------------"
+				 + "----------------------------"
+				 + "<br />"
+				 + join(__email_footer_msgs__, " ")
+				 + "</small>";
+
+
+# ========================================================================
+# Configuration of email descriptions.
+#
+# Values of "name" are configured in "globals-lang/<lang>/sys.rule".
+# Values of "value" are configured in each rule script file.
+# ========================================================================
+__email_desc_list__ = [
+	{ 'name': __email_desc_type__,    'value': '__desc_type__'    },
+	{ 'name': __email_desc_level__,   'value': 'level_name_hl'   },
+	{ 'name': __email_desc_subtype__, 'value': '__desc_subtype__' },
+	{ 'name': __email_desc_action__,  'value': '__desc_action__'  },
+	{ 'name': __email_desc_time__,    'value': 'time'             },
+	{},
+	{ 'name': __email_desc_detail__ }
+];
+
+
+# ========================================================================
+# Configuration of alerting (output) features.
+#
+# xxx_debug__:    Print the alerting results.
+# xxx_es__:       Send alerting results to ES server.
+# xxx_email__:    Send alerting results to email address list.
+# xxx_throttle__: Throttling of sending emails.
+# ========================================================================
+__enable_alert_debug__    = true;
+__enable_alert_es__       = false;
+__enable_alert_email__    = true;
+__enable_alert_throttle__ = true;
+
+
+# ========================================================================
+# Alert levels.
+#
+# The levels description is configurated in "globals-lang/<lang>/sys.rule"
+# and the variable name is "__levels_all__".
+#
+# This value is used to control sending emails of each levels.
+# ========================================================================
+__levels_sendemail__ = {
+	"INFO":     false,
+	"WARNING":  true,
+	"CRITICAL": true
+};
+
+
+# ========================================================================
+# Configuration of alert throttling.
+#
+# @session:  String value of session name.
+# @window:   Session window size. Session interval = sched_time * window.
+# @min, max: Range of count of data to output.
+# ========================================================================
+__throttle_session__ = 'throttle';
+__throttle_window__  = 12;
+__throttle_min__     = 1;
+__throttle_max__     = 1;
+
+
+# ========================================================================
+# Configuration of alerting output features.
+#
+# __alert_async__:       Output data in asynchronous mode.
+# __alert_es_withdesc__: Append __desc_type__ and __desc_subtype__ fields
+#                        while inserting data to ES server.
+# __enable_owner_sip__:  Append sip description for each alerting records.
+# ========================================================================
+__alert_async__       = false;
+__alert_es_withdesc__ = true;
+__enable_owner_sip__  = true;
+
+
+# ========================================================================
+# Configuration of interval units used by SQLAlert and rule scripts.
+#
+# US_xxx: In microseconds.
+# MS_xxx: In milliseconds.
+# ========================================================================
+US_MS   = 1       * 1000;
+US_SEC  = US_MS   * 1000;
+US_MIN  = US_SEC  * 60;
+US_HOUR = US_MIN  * 60;
+US_DAY  = US_HOUR * 24;
+US_WEEK = US_DAY  * 7;
+
+MS_SEC  = 1       * 1000;
+MS_MIN  = MS_SEC  * 60;
+MS_HOUR = MS_MIN  * 60;
+MS_DAY  = MS_HOUR * 24;
+MS_WEEK = MS_DAY  * 7;
+
+
+# ========================================================================
+# Configuration of bytes/bits units used by SQLAlert and rule scripts.
+# ========================================================================
+KB = 1024 * 1;
+MB = 1024 * KB;
+GB = 1024 * MB;
+TB = 1024 * GB;
+PB = 1024 * TB;
+EB = 1024 * PB;
+
+
+# ========================================================================
+# Configuration of fields description.
+# 
+# __enable_ip_to_sip_dip__:       Translate "ip"   to "sip"   and "dip".
+# __enable_port_to_sport_dport__: Translate "port" to "sport" and "dport".
+# __fields_ipfields__:            Translate IP values of fields.
+#
+# The description of fields is configured in file
+# "globals-lang/<lang>/fields.rule"
+# ========================================================================
+__enable_ip_to_sip_dip__       = true;
+__enable_port_to_sport_dport__ = true;
+
+__fields_ipfields__ = {
+	"ip":      true,
+	"sip":     true,
+	"dip":     true,
+	"addr":    true,
+	"address": true
+};
+

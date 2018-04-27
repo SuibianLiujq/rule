@@ -1,0 +1,42 @@
+# This file defines the rule to find the select fields description.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "cfg/data/fields.rule";
+
+
+# fields_get_item() - Returns the field description item.
+#
+# @name: Field name.
+#
+# This function returns a dict: { "name":"<name>", "desc": "<desc>", "fmt": "<fmt>" }.
+# The 'desc' field will be set with @name, and 'fmt' will be not set if the field is
+# not found in __field_list__.
+def fields_get_item(name) {
+	dict = { "name": name, "desc": name };
+
+	item = __fields_list__[name];
+	if is_dict(item) {
+		if "desc" in item { dict["desc"] = item["desc"]; }
+		if "fmt"  in item { dict["fmt"]  = item["fmt"]; }
+	}
+
+	return dict;
+}
+
+
+# fields_get_list() - Returns a list of field description item.
+#
+# @name_list: List of field name.
+def fields_get_list(name_list) {
+	list = [ ];
+
+	if !is_list(name_list) { name_list = [ name_list ]; }
+	if is_list(name_list) {
+		for name in name_list {
+			list = append(list, fields_get_item(name));
+		}
+	}
+
+	return list;
+}
+

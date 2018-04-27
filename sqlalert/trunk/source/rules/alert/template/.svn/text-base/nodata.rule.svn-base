@@ -1,0 +1,70 @@
+# ########################################################################
+# This file defines the rule to detect NODATA event of ES indices.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# =======================================================================
+# __query_nodedict() - Query ES and returns a dict contains all iTAP nodes.
+#
+# [Arguments]
+#     index: Index name.
+#
+# [Returns]
+#     Returns a dict contains all iTAP nodes.
+# =======================================================================
+def __query_nodedict(index) {
+	if is_null(index) { return []; }
+
+	__sql_select__ = "COUNT(*) AS count";
+	__sql_from__   = index;
+	__sql_where__  = "last(%(__range__))";
+	__sql_group__  = "node";
+	__sql_limit__  = 100;
+
+	return list_to_dict(query(sql_make()), "node");
+}
+
+
+# =======================================================================
+# __query_nodelist() - Query ES and returns a list contains all iTAP nodes.
+#
+# [Arguments]
+#     index: Index name.
+#
+# [Returns]
+#     Returns a list contains all iTAP nodes.
+# =======================================================================
+def __query_nodelist(index) {
+	list = []; dict = __query_nodedict(index);
+
+	for node in __list_itap__ {
+		if !(node in dict) {
+			list = append(list, {
+				"node": node,
+				"index": index,
+				"@timestamp": time("T")
+			});
+		}
+	}
+
+	return list;
+}
+
+
+# ========================================================================
+# main() - Entry of the rule.
+# ========================================================================
+def main() {
+	if !is_list(__list_index__) || len(__list_index__) == 0 { return; }
+	if !is_list(__list_itap__)  || len(__list_itap__)  == 0 { return; }
+
+	result = multi_query("__query_nodelist", len(__list_index__), __list_index__);
+
+	__fields__        = [ "@timestamp", "node", "index" ];
+	__throttle_keys__ = [ "node", "index" ];
+
+	alert(result);
+}
+

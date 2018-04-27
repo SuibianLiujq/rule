@@ -1,0 +1,62 @@
+# This file defines the rule to select the emails.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "cfg/data/emails.rule";
+include "cfg/levels.rule";
+include "cfg/fields.rule";
+
+
+# emails_get_list() - Returns the email list.
+#
+# @names: Name or list of name string.
+#
+# This function returns the list of email-addr of given
+# names. It returns an empty list if all names not found.
+def emails_get_list(names) {
+	dict = { };
+
+	# Select the administrators.
+	if !is_str(sendto) { sendto = "all"; }
+	if sendto in [ "all", "admin" ] {
+		for name in __emails_admin__ {
+			if name in __emails__ {
+				dict[name] = __emails__[name];
+			}
+		}
+	}
+
+	# Select the owners.
+	if sendto in [ "all", "owner" ] {
+		if is_str(names) { names = [ names ]; }
+		if is_list(names) {
+			for name in names {
+				if name in __emails__ {
+					dict[name] = __emails__[name];
+				}
+			}
+		}
+	}
+
+	return is_empty(dict) ? [] : values(dict);
+}
+
+
+# send_email() - Send alert result from email.
+#
+# @result: Alert result (list of DICTs).
+# @fields: Fields to format.
+def emails_send(result, fields) {
+	__email_title__  = __alert_title__;
+	__email_fields__ = fields_get_list(fields);
+	__email_desc__   = [
+		{ "name": __emails_desc_type__,  "value": __alert_type__ },
+		{ "name": __emails_desc_level__, "value": levels_get_desc(__level__) },
+		{ "name": __emails_desc_desc__,  "value": __alert_desc__ },
+		{ "name": __emails_desc_time__,  "value": time("T") },
+		{ }, # for newline.
+		{ "name": __emails_desc_detail__ }
+	];
+
+	alert_email(result);
+}
+

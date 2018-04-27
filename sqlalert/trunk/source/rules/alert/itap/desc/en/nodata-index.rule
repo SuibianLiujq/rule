@@ -1,0 +1,17 @@
+# ########################################################################
+# This file defines the configuration of rule.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Description of email titles.
+# ========================================================================
+__desc_type__    = "[iTAP] NODATA of ES Indices Detection";
+__desc_subtype__ = "There no data found in ES indices in last "
+                 + __range__
+				 + ".";
+__desc_action__  = "Please check it out.";
+__desc_title__   = __desc_type__ + ": " + __desc_subtype__; 
+

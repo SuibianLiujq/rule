@@ -1,0 +1,42 @@
+# This file defines the email SMTP and footer message.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configuration of SMTP.
+#
+# @host:     SMTP server address/domain.
+# @port:     SMTP port.
+# @SSL/TLS:  Use SSL/TLS crypto.
+# @address:  Email user address (sender).
+# @password: Password of email address.
+#
+# Email module will use this configuration to send emails.
+__email_smtp__ = { 
+	"host": "smtp.qiye.163.com",
+	"port": 25, 
+	"SSL/TLS": true,
+	"address": "test.alert@clearclouds-global.com",
+	"password": "YLL_12_34_56"
+};
+
+
+# Configuration of FOOTER message of email.
+#
+# SQLAlert will append this message to the email body while sending
+# alert emails.
+__email_footer__ = "
+	<br/><br/><hr/>
+	This email is sent by SQLAlert engine and do not reply on it.<br/>
+	Please contact with administrator if you are not in the email list.<br/>
+	Thanks.
+";
+
+
+# MISC configurations.
+#
+# __highlight__ - Highlight the level fields.
+# __sendto__    - Group to send emails to.
+__highlight__ = true;
+__sendto__    = "all";
+

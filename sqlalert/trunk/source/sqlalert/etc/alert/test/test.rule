@@ -1,0 +1,6 @@
+data = [
+	{ "name": "zhang", "age": 100, "@timestamp": time("T") }
+];
+
+pprint(data);
+alert_es(data);

@@ -1,0 +1,41 @@
+# ########################################################################
+# This file defines the special configuration for YUN Li Lai.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Configuration of ES server address and port.
+#
+# __es_host_query__:  Server address of query data.
+# __es_host_insert__: Server address of outputing alert result.
+# ========================================================================
+__es_host__        = "192.168.0.122:9222";
+__es_host_query__  = __es_host__;
+__es_host_insert__ = __es_host__;
+
+
+# ========================================================================
+# Configuration of SMTP server.
+#
+# SQLAlert use this configuration to send emails for all output.
+# ========================================================================
+__email_smtp__ = {
+	"host": "smtp.qiye.163.com",
+	"port": 25,
+	"SSL/TLS": true,
+	"address": "test.alert@clearclouds-global.com",
+	"password": "YLL_12_34_56"
+};
+
+
+# ========================================================================
+# Configuration of email address list.
+#
+# SQLAlert send all emails to the address in this list. Re-configure this
+# value if you want to send results to different people in your own rules.
+# ========================================================================
+__email_sendto__ = [
+	"lidan.zhang@clearclouds-global.com"
+];

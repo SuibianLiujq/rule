@@ -1,0 +1,56 @@
+# This file defines the rule(action) to detec NEW_PROTO event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "alert/ip/cfg/newproto.rule";
+
+
+# Check configurations.
+# 
+# range      - Time range to detect from the past to now.
+# output     - Output method.
+# subtype    - Alert subtype.
+# level      - Alert level.
+# node_list  - List of itap node name to detect.
+# index_list - List of index name to detect.
+if !is_str(range)   { range   = "5m"; }
+if !is_str(output)  { output  = "es"; }
+if !is_str(subtype) { subtype = "NEW_PROTO"; }
+if !is_str(level)   { level   = "WARNING"; }
+if !is_num(k_Bps)   { k_Bps   = 0; }
+if !is_num(k_pps)   { k_pps   = 0; }
+
+
+# Appending 'type', 'subtype' and '@timestamp' to all of the alert result.
+#
+# For 'email' output 'type' and 'subtype' will be ignored.
+__alert_append__ = { "type": "IP", "subtype": subtype, "@timestamp": time("T") };
+
+
+# Execute the rule and output the alert result.
+#
+# @node_list:  List of itap node names.
+# @index_list: List of index names.
+include "alert/ip/rule/newproto.rule";
+result = exec_rule(protocols, k_Bps, k_pps);
+if is_empty(result) { exit(); }
+
+
+# Output alert result.
+#
+# __level__      - Use level description of 'email' output.
+# __level_list__ - A list used to map level for each item in result list.
+# __level_keys__ - A list of keys to map level.
+# __output__     - Output method.
+# __owner_key__  - Key use to search owners email.
+# __fields__     - Fileds to format.
+__level__      = level;
+__level_list__ = level_list;
+__level_keys__ = [ "Bps", "pps" ];
+__output__     = output;
+__owner_key__  = "node";
+__fields__     = [ "@timestamp", "node", "protocol", "Bps", "pps", "owner", "level" ];
+
+
+include "cfg/output.rule";
+output(result, __fields__, "itap");
+

@@ -1,0 +1,80 @@
+
+
+### value_map()
+
+
+
+
+## 报警等级相关函数
+### level_desc()
+### level_desc_hl()
+### level_name()
+### level_name_hl()
+### level_name_desc()
+### level_name_desc_hl()
+
+
+
+## 值聚合函数
+### avg()
+### max()
+### median()
+### min()
+### stdev()
+### variance()
+### sum()
+### percentile()
+
+
+## 多维聚合函数
+### agg_items()
+### agg_items_max()
+### agg2_items_max()
+### agg3_items_max()
+### agg4_items_max()
+
+
+## 对象聚合函数
+### agg_avg()
+### agg_max()
+### agg_median()
+### agg_min()
+### agg_percentile()
+### agg_stdev()
+### agg_sum()
+### agg_values()
+### agg_variance()
+
+
+
+
+## IP 相关函数
+### ip_in()
+### ip_map()
+
+
+## 一维对象聚合函数
+### item_filter()
+### item_max()
+### item_median()
+### item_min()
+### item_percentile()
+### item_set()
+### item_values()
+
+
+## SQL 相关函数
+### sql_make()
+
+
+## 一维值聚合函数
+### v_max()
+### v_min()
+### value_max()
+### value_min()
+### value_median()
+### value_avg()
+### value_sum()
+### value_variance()
+### value_stdev()
+### value_percentile()

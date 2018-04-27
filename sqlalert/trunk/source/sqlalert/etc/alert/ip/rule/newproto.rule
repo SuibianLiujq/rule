@@ -1,0 +1,30 @@
+# This file defines the rule(rule) to detect NEW_PROTO event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# SQL statements to query document count of all nodes.
+__sql__ = "
+	SELECT
+		sum(inbyte   + outbyte)   AS Bps,
+		sum(inpacket + outpacket) AS pps 
+	FROM 'traffic-*'
+	WHERE
+		last(%(range))
+		AND NOT protocol IN $(protocols)
+	GROUP BY
+		date_histogram(1m) AS @timestamp,
+		protocol,
+		node
+";
+
+
+# exec_rule() - Execute the rule and returns the result.
+#
+# @protocols: List of known protocol name.
+# @k_Bps:     Threshold of Bps.
+# @k_pps:     Threshold of pps.
+def exec_rule(protocols, k_Bps, k_pps) {
+	return query_avgby_num(__sql__, 60, "Bps>= k_Bps|| pps >= k_pps");
+}
+

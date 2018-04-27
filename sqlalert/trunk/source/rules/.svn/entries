@@ -1,0 +1,77 @@
+10
+
+dir
+1614
+svn://192.168.0.66/src/alert/sqlalert-rules/trunk
+svn://192.168.0.66
+
+
+
+2018-04-04T07:02:24.516730Z
+1580
+lidan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64af2b4f-4182-472f-a6fd-33aaade19a08
+
+test
+dir
+
+globals-lang
+dir
+
+globals
+dir
+
+tasks
+dir
+
+release-build.sh
+file
+
+
+
+
+2018-04-27T04:19:10.604704Z
+e52f1534ec354d98de00dd26bef3429d
+2018-01-31T12:19:39.848990Z
+1457
+lidan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+388
+
+alert
+dir
+

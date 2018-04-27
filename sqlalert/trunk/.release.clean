@@ -1,0 +1,3 @@
+rm -rf source
+rm -rf .release.clean
+rm -rf .release.modules

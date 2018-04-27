@@ -1,0 +1,26 @@
+{
+	"global": {
+		"enable": true,
+		"runOnStart": true,
+		"interval": 300,
+		"file": [
+			"alert/itap/nodata.rule",
+			"alert/link/nodata.rule",
+			"alert/link/gtmtu.rule",
+			"alert/ip/newproto.rule"
+		]
+	},
+
+	"tcp":  {
+		"enable": true, 
+		"runOnStart": false, 
+		"interval": 300,
+		"file": [
+			"alert/tcp/sip-scan-dport.rule",
+			"alert/tcp/sip-scan-dip.rule",
+			"alert/tcp/sip-attack-dip.rule",
+			"alert/tcp/traffic-lan-sip-dip.rule",
+			"alert/tcp/traffic-wan-sip-dip.rule"
+		]
+	}
+}

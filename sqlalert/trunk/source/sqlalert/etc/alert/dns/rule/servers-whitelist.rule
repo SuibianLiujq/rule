@@ -1,0 +1,32 @@
+# This file defines the rule(rule) to detect SERVERS_WHITELIST event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# SQL statements.
+__sql__ = "
+	SELECT
+		sum(flow) AS flows
+	FROM  'dns-*'
+	WHERE
+		last(%(range))
+		AND isresponse = 0
+		AND NOT domain IN [ 'N_DNS' ]
+		AND NOT dip IN $(whitelist)
+	GROUP BY
+		node,
+		sip,
+		dip,
+		domain
+	ORDER BY
+		flows DESC
+";
+
+
+# exec_rule() - Execute the rule and returns the result.
+#
+# @whitelist: A list of values.
+def exec_rule(k_count) {
+	return query(__sql__);
+}
+

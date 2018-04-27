@@ -1,0 +1,151 @@
+# This file defines the rule to hilight the level.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "cfg/data/levels.rule";
+
+
+# levels_get_desc() - Returns the desc of the given level.
+#
+# @name: Level name string.
+#
+# This function returns the 'name(desc)' value of given level name.
+def levels_get_desc(name) {
+	desc = name + " (" + __levels_def_desc__ + ")";
+
+	item = __levels_dict__[name];
+	if is_dict(item) && ("desc" in item) {
+		desc = name + " (" + item["desc"] + ")";
+
+		if __highlight__ && ("color" in item) {
+			desc = "<font color=" + item["color"] + ">" + desc + "</font>";
+		}
+	}
+
+	return desc;
+}
+
+
+# __levels_match_gte() - Check if key matches the level.
+#
+# @level: A dict contains the level values.
+# @key:   Key to compare.
+# @value: Value to compare.
+def __levels_match_gte(level, key, value) {
+	if !is_dict(level) { return value >= level; }
+	if key in level    { return value >= level[key]; } 
+	return false;
+}
+
+
+# __levels_match_gte_dict - Check if the dict mathes the level.
+#
+# @level: A dict contains the level values.
+# @value: A dict of value to compare.
+def __levels_match_gte_dict(level, value) {
+	if is_dict(value) {
+		for key, value in dict {
+			if __levels_match_gte(level, key, value) {
+				return true;
+			}
+		}
+	} else {
+		for key, item in level {
+			if key != "level" {
+				if value >= item {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+
+# levels_get_level() - Rerurns the level of the given value.
+#
+# @levels: A list of sored (in ASC order) levels.
+# @value:  Value used to check the level.
+def levels_get_level(levels, value) {
+	if !is_list(levels) { return to_str(levels); }
+	
+	level = __levels_def_level__;
+	for item in levels {
+		if is_dict(item) && ("level" in item) {
+			if __levels_match_gte_dict(item, value) {
+				level = item["level"];
+			}
+		}
+	}
+
+	return level;
+}
+
+
+def __levels_map_desc_item(dict, levels, keys) {
+	level = levels;
+
+	if is_list(levels) && is_dict(dict) {
+		level = levels_get_level(levels, copy_dict(dict, keys));
+	}
+
+	dict[__levels_field__] = levels_get_desc(level);
+}
+
+
+# levels_map_level() - Add level (desc) field to the items in the given list.
+#
+# @list:   List of dict.
+# @levels: List of levels.
+# @keys:   Key used to select the level.
+def levels_map_desc(list, levels, keys) {
+	if is_list(list) {
+		for item in list {
+			__levels_map_desc_item(item, levels, keys);
+		}
+	} else {
+		__levels_map_desc_item(list, levels, keys);
+	}
+}
+
+
+def __levels_map_level_item(dict, levels, keys) {
+	level = levels;
+
+	if is_list(levels) && is_dict(dict) {
+		level = levels_get_level(levels, copy_dict(dict, keys));
+	}
+
+	dict[__levels_field__] = level;
+}
+
+
+# levels_map_level() - Add level filed to the items in the given list.
+#
+# @list:   List of dict.
+# @levels: List of levels.
+# @key:    Key used to select the level.
+def levels_map_level(list, levels, keys) {
+	if is_list(list) {
+		for item in list {
+			__levels_map_level_item(item, levels, keys);
+		}
+	} else {
+		__levels_map_level_item(list, levels, keys);
+	}
+}
+
+
+# levels_map() - Fill 'level' field to all item in the list.
+#
+# @list:   List of DICTs.
+# @levels: List of level defines.
+# @key:    Key name to map the level.
+def levels_map(list, levels, keys) {
+	if __level_type__ == "desc" {
+		levels_map_desc(list, levels, keys);
+	} else {
+		levels_map_level(list, levels, keys);
+	}
+}
+

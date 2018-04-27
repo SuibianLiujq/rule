@@ -1,0 +1,41 @@
+# ########################################################################
+# This file define the base template of rules.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+include "alert/template/base/threshold-hisdata.rule";
+
+
+# ========================================================================
+# Supported metric.
+# ========================================================================
+__dict_metric__ = {
+	"flows":       [ "SUM(flow)           AS flows"       ],
+	"requests":    [ "SUM(flow)           AS requests"    ],
+	"count_dip":   [ "COUNT(UNIQUE dip)   AS count_dip"   ],
+	"count_dport": [ "COUNT(UNIQUE dport) AS count_dport" ]
+};
+
+
+# ========================================================================
+# main() - Entry of the rule.
+# ========================================================================
+def main() {
+	metric = __dict_metric__[__metric__];
+	if !metric {
+		error("__metric__ (%(__metric__)) not found");
+	}
+
+	# Setup global variable used by template.
+	__query_index__   = __index__;
+	__query_metrics__ = metric;
+	__metric_name__   = __metric__;
+	__query_stat__    = "1m";
+	__query_func__    = "query";
+	__agg_items__     = "max";
+
+	# Call the function list.
+	check_cfg();
+	return call_list(__func_list());
+}
+

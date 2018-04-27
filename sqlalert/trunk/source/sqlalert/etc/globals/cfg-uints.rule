@@ -1,0 +1,21 @@
+# This file defines the value of units.
+# 
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Unit value of time.
+US   = 1;
+MS   = US   * 1000;
+SEC  = MS   * 1000;
+MIN  = SEC  * 60;
+HOUR = MIN  * 60;
+DAY  = HOUR * 24;
+WEEK = DAY  * 7;
+
+
+# Unit value of bytes.
+B  = 1;
+KB = B  * 1024;
+MB = KB * 1024;
+GB = KB * 1024;
+

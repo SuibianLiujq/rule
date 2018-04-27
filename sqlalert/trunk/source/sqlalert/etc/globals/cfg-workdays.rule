@@ -1,0 +1,30 @@
+# This file defines the GLOBAL workdays of the whole year.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configuration of workdays of 2017.
+#
+# @type:       Turn on/off the day and hour.
+#              on  -  The list of day and hour is workday
+#              off - The list of day and hour is holiday or weekend.
+# @months:     The months from 1 to 12.
+# @month_days: The day of the month from 1 to 31.
+# @week_days:  The day of the week from 1 to 7.
+# @hours:      The hour of the day from 0 to 23.
+#
+# Every item in __workdays__ is the list of days and hours to trun on/off.
+# There are four ways to specify the range:
+#   (1) A single number: 10.
+#   (2) String with two number split by 'to': "1 to 12".
+#   (3) List of numbers: [5, 6, 7, 8].
+#   (4) The datetime string: "2017-06-18 12"
+#
+# Function check_datetime() use __workdays__ to check whether current
+# time is 'on' or 'off'. If current time is configured as 'on' check_datetime()
+# returns true, otherwise it returns false.
+__workdays__ = [
+    { "type": "on",  "months": "1 to 12", "month_days": "1 to 31", "week_days": "1 to 5", "hours": "0 to 23" },
+	{ "type": "off", "months": 10, "month_days": "1 to 8" }
+];
+

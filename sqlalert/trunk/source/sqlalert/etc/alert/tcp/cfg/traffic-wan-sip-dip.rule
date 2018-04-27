@@ -1,0 +1,48 @@
+# This file defines the rule(cfg) to detect WAN traffic between sip and dip.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range - Time range to detect from the past to now.
+# k_Bps - Threshold of Bps (Byte per second).
+# k_pps - Threshold of pps (packets per second).
+range = "5m";
+k_Bps = 1 * MB;
+k_pps = 8000;
+
+
+# Configration of output.
+#
+# output     - Output method of alert result.
+#              "es":    Insert result back to ES server.
+#              "email": Send result to email server.
+# subtype    - Sub-type of alert result.
+# sendto     - Type to select the email address.
+#              "all":   Owners and administrators.
+#              "owner": Owners only.
+#              "admin": Administrators only.
+# level      - Alert level.
+# level_list - Level list to map the level.
+output  = "email";
+subtype = "TRAFFIC";
+sendto  = is_str(__sendto__) ? __sendto__ : "all";
+level   = "WARNING";
+level_list = [
+	{ "level": "WARNING",   "Bps": 1  * MB, "pps": 8000 },
+	{ "level": "CRITICAL",  "Bps": 3  * MB, "pps": 24000 },
+	{ "level": "EMERGENCY", "Bps": 5  * MB, "pps": 40000 },
+	{ "level": "ERROR",     "Bps": 10 * MB, "pps": 80000 }
+];
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+title        = "L4 (TCP) 内网两个IP地之间流量 Bps 超过 " + fmt_bytes(k_Bps) + ", pps 超过 " + k_pps;
+desc_type    = "L4 (TCP) 流量监控.";
+desc_subtype = "L4 (TCP) 内网两个IP地之间流量 Bps 超过 " + fmt_bytes(k_Bps) + ", pps 超过 " + k_pps;
+

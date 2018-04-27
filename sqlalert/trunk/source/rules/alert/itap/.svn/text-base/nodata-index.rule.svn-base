@@ -1,0 +1,31 @@
+# ########################################################################
+# This file defines the rule to detect NODATA event of ES indices.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+import "alert/template/nodata.rule";
+import "alert/itap/cfg/nodata-index.rule";
+
+
+# ========================================================================
+# Base configuration.
+#
+# List of indices/itap-nodes to detect.
+# ========================================================================
+__list_index__ = __indexlist__;
+__list_itap__  = __itaplist__;
+
+
+# ========================================================================
+# Session name of email throttling.
+#
+# This configuration must be UNIQUE in the rule chains.
+# ========================================================================
+__throttle_session__ = "itap-nodata-index";
+
+
+# ========================================================================
+# Run the rule from "main" function.
+# ========================================================================
+run("main");
+

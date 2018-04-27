@@ -1,0 +1,3144 @@
+
+state 0
+	$accept: .all $end 
+
+	Y_SELECT  shift 4
+	.  error
+
+	all  goto 1
+	stmt  goto 2
+	stmt_select  goto 3
+
+state 1
+	$accept:  all.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	all:  stmt.    (1)
+
+	.  reduce 1 (src line 133)
+
+
+state 3
+	stmt:  stmt_select.stmt_list 
+
+	Y_FROM  shift 14
+	Y_WHERE  shift 15
+	Y_GROUP  shift 16
+	Y_ORDER  shift 17
+	Y_LIMIT  shift 18
+	Y_HAVING  shift 19
+	.  error
+
+	stmt_list  goto 5
+	stmt_item  goto 6
+	stmt_from  goto 7
+	stmt_where  goto 8
+	stmt_whereby  goto 9
+	stmt_groupby  goto 10
+	stmt_orderby  goto 11
+	stmt_limit  goto 12
+	stmt_having  goto 13
+
+state 4
+	stmt_select:  Y_SELECT.stmt_select_list 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_select_item  goto 21
+	stmt_select_list  goto 20
+	stmt_as  goto 23
+	expr  goto 25
+	expr_all  goto 22
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 5
+	stmt:  stmt_select stmt_list.    (2)
+	stmt_list:  stmt_list.stmt_item 
+
+	Y_FROM  shift 14
+	Y_WHERE  shift 15
+	Y_GROUP  shift 16
+	Y_ORDER  shift 17
+	Y_LIMIT  shift 18
+	Y_HAVING  shift 19
+	.  reduce 2 (src line 135)
+
+	stmt_item  goto 83
+	stmt_from  goto 7
+	stmt_where  goto 8
+	stmt_whereby  goto 9
+	stmt_groupby  goto 10
+	stmt_orderby  goto 11
+	stmt_limit  goto 12
+	stmt_having  goto 13
+
+state 6
+	stmt_list:  stmt_item.    (10)
+
+	.  reduce 10 (src line 137)
+
+
+state 7
+	stmt_item:  stmt_from.    (3)
+
+	.  reduce 3 (src line 136)
+
+
+state 8
+	stmt_item:  stmt_where.    (4)
+
+	.  reduce 4 (src line 136)
+
+
+state 9
+	stmt_item:  stmt_whereby.    (5)
+
+	.  reduce 5 (src line 136)
+
+
+state 10
+	stmt_item:  stmt_groupby.    (6)
+
+	.  reduce 6 (src line 136)
+
+
+state 11
+	stmt_item:  stmt_orderby.    (7)
+
+	.  reduce 7 (src line 136)
+
+
+state 12
+	stmt_item:  stmt_limit.    (8)
+
+	.  reduce 8 (src line 136)
+
+
+state 13
+	stmt_item:  stmt_having.    (9)
+
+	.  reduce 9 (src line 136)
+
+
+state 14
+	stmt_from:  Y_FROM.stmt_from_list 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	'$'  shift 79
+	.  error
+
+	stmt_from_item  goto 85
+	stmt_from_list  goto 84
+	expr_var  goto 88
+	expr_ident  goto 86
+	expr_str  goto 87
+
+state 15
+	stmt_where:  Y_WHERE.stmt_where_item 
+	stmt_whereby:  Y_WHERE.Y_BY stmt_groupby_list 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	Y_BY  shift 90
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_where_item  goto 89
+	expr  goto 25
+	expr_all  goto 91
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 16
+	stmt_groupby:  Y_GROUP.Y_BY stmt_groupby_list 
+
+	Y_BY  shift 92
+	.  error
+
+
+state 17
+	stmt_orderby:  Y_ORDER.Y_BY stmt_orderby_list 
+
+	Y_BY  shift 93
+	.  error
+
+
+state 18
+	stmt_limit:  Y_LIMIT.stmt_limit_list 
+
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	.  error
+
+	stmt_limit_item  goto 95
+	stmt_limit_list  goto 94
+	expr_num  goto 96
+	expr_int  goto 74
+	expr_float  goto 75
+
+state 19
+	stmt_having:  Y_HAVING.stmt_having_item 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_having_item  goto 97
+	expr  goto 25
+	expr_all  goto 98
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 20
+	stmt_select_list:  stmt_select_list.',' stmt_select_item 
+	stmt_select:  Y_SELECT stmt_select_list.    (16)
+
+	','  shift 99
+	.  reduce 16 (src line 141)
+
+
+state 21
+	stmt_select_list:  stmt_select_item.    (14)
+
+	.  reduce 14 (src line 140)
+
+
+state 22
+	stmt_select_item:  expr_all.    (12)
+	stmt_as:  expr_all.Y_AS expr_ident 
+	stmt_as:  expr_all.Y_AS expr_str 
+	expr_cond_left:  expr_all.    (184)
+
+	Y_AS  shift 100
+	'?'  reduce 184 (src line 282)
+	.  reduce 12 (src line 139)
+
+
+state 23
+	stmt_select_item:  stmt_as.    (13)
+
+	.  reduce 13 (src line 139)
+
+
+state 24
+	expr_all:  expr_agg.    (51)
+	expr_agg_level0:  expr_agg.    (69)
+	expr_agg_level1:  expr_agg.    (71)
+	expr_iterable:  expr_agg.    (77)
+
+	Y_IN  reduce 69 (src line 181)
+	'['  reduce 77 (src line 186)
+	'+'  reduce 69 (src line 181)
+	'-'  reduce 69 (src line 181)
+	'*'  reduce 69 (src line 181)
+	'/'  reduce 69 (src line 181)
+	'%'  reduce 69 (src line 181)
+	'<'  reduce 71 (src line 182)
+	'>'  reduce 71 (src line 182)
+	Y_EQ  reduce 71 (src line 182)
+	Y_NE  reduce 71 (src line 182)
+	Y_LE  reduce 71 (src line 182)
+	Y_GE  reduce 71 (src line 182)
+	Y_AND  reduce 71 (src line 182)
+	Y_OR  reduce 71 (src line 182)
+	.  reduce 51 (src line 173)
+
+
+state 25
+	expr_all:  expr.    (52)
+
+	.  reduce 52 (src line 173)
+
+
+state 26
+	expr_agg:  '('.expr ')' 
+	expr_agg:  '('.expr_agg ')' 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr  goto 101
+	expr_all  goto 103
+	expr_agg  goto 102
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 27
+	expr:  expr_level3.    (50)
+
+	.  reduce 50 (src line 172)
+
+
+state 28
+	expr_level3:  expr_level2.    (67)
+
+	.  reduce 67 (src line 179)
+
+
+state 29
+	expr_level3:  expr_cond.    (68)
+
+	.  reduce 68 (src line 179)
+
+
+state 30
+	expr_level2:  expr_level1.    (64)
+	expr_agg_level1:  expr_level1.    (72)
+
+	'<'  reduce 72 (src line 182)
+	'>'  reduce 72 (src line 182)
+	Y_EQ  reduce 72 (src line 182)
+	Y_NE  reduce 72 (src line 182)
+	Y_LE  reduce 72 (src line 182)
+	Y_GE  reduce 72 (src line 182)
+	Y_AND  reduce 72 (src line 182)
+	Y_OR  reduce 72 (src line 182)
+	.  reduce 64 (src line 178)
+
+
+state 31
+	expr_level2:  expr_comp.    (65)
+	expr_logical_andor_left:  expr_comp.    (174)
+
+	Y_AND  reduce 174 (src line 274)
+	Y_OR  reduce 174 (src line 274)
+	.  reduce 65 (src line 178)
+
+
+state 32
+	expr_level2:  expr_logical.    (66)
+	expr_logical_andor_left:  expr_logical.    (175)
+
+	Y_AND  reduce 175 (src line 274)
+	Y_OR  reduce 175 (src line 274)
+	.  reduce 66 (src line 178)
+
+
+state 33
+	expr_cond:  expr_cond_left.'?' expr_cond_middle ':' expr_cond_right 
+
+	'?'  shift 104
+	.  error
+
+
+state 34
+	expr_level1:  expr_level0.    (60)
+	expr_agg_level0:  expr_level0.    (70)
+
+	Y_IN  reduce 70 (src line 181)
+	'+'  reduce 70 (src line 181)
+	'-'  reduce 70 (src line 181)
+	'*'  reduce 70 (src line 181)
+	'/'  reduce 70 (src line 181)
+	'%'  reduce 70 (src line 181)
+	.  reduce 60 (src line 177)
+
+
+state 35
+	expr_level1:  expr_arithmetic.    (61)
+	expr_addsub_left:  expr_arithmetic.    (149)
+	expr_in_left:  expr_arithmetic.    (164)
+
+	Y_IN  reduce 164 (src line 263)
+	'+'  reduce 149 (src line 253)
+	'-'  reduce 149 (src line 253)
+	.  reduce 61 (src line 177)
+
+
+state 36
+	expr_level1:  expr_listdict.    (62)
+	expr_iterable:  expr_listdict.    (81)
+
+	'['  reduce 81 (src line 186)
+	.  reduce 62 (src line 177)
+
+
+state 37
+	expr_level1:  expr_in.    (63)
+
+	.  reduce 63 (src line 177)
+
+
+state 38
+	expr_comp:  expr_comp_left.COMP expr_comp_right 
+
+	'<'  shift 106
+	'>'  shift 107
+	Y_EQ  shift 110
+	Y_NE  shift 111
+	Y_LE  shift 108
+	Y_GE  shift 109
+	.  error
+
+	COMP  goto 105
+
+state 39
+	expr_logical:  expr_logical_andor.    (171)
+
+	.  reduce 171 (src line 273)
+
+
+state 40
+	expr_logical:  expr_logical_not.    (172)
+
+	.  reduce 172 (src line 273)
+
+
+state 41
+	expr_level0:  expr_base.    (55)
+
+	.  reduce 55 (src line 176)
+
+
+state 42
+	expr_level0:  expr_func.    (56)
+	expr_iterable:  expr_func.    (80)
+
+	'['  reduce 80 (src line 186)
+	.  reduce 56 (src line 176)
+
+
+state 43
+	expr_level0:  expr_self.    (57)
+	expr_self_left:  expr_self.    (123)
+
+	Y_INC  reduce 123 (src line 220)
+	Y_DEC  reduce 123 (src line 220)
+	.  reduce 57 (src line 176)
+
+
+state 44
+	expr_level0:  expr_negative.    (58)
+
+	.  reduce 58 (src line 176)
+
+
+state 45
+	expr_level0:  expr_index.    (59)
+	expr_iterable:  expr_index.    (79)
+	expr_self_left:  expr_index.    (122)
+
+	'['  reduce 79 (src line 186)
+	Y_INC  reduce 122 (src line 220)
+	Y_DEC  reduce 122 (src line 220)
+	.  reduce 59 (src line 176)
+
+
+state 46
+	expr_arithmetic:  expr_addsub.    (145)
+
+	.  reduce 145 (src line 252)
+
+
+state 47
+	expr_arithmetic:  expr_muldiv.    (146)
+	expr_muldiv_left:  expr_muldiv.    (154)
+
+	'*'  reduce 154 (src line 255)
+	'/'  reduce 154 (src line 255)
+	.  reduce 146 (src line 252)
+
+
+state 48
+	expr_arithmetic:  expr_modular.    (147)
+	expr_modular_left:  expr_modular.    (158)
+
+	'%'  reduce 158 (src line 257)
+	.  reduce 147 (src line 252)
+
+
+state 49
+	expr_listdict:  expr_list.    (75)
+
+	.  reduce 75 (src line 185)
+
+
+state 50
+	expr_listdict:  expr_dict.    (76)
+
+	.  reduce 76 (src line 185)
+
+
+state 51
+	expr_in:  expr_in_left.Y_IN expr_in_right 
+
+	Y_IN  shift 112
+	.  error
+
+
+state 52
+	expr_comp_left:  expr_agg_level1.    (168)
+	expr_logical_andor_left:  expr_agg_level1.    (173)
+
+	Y_AND  reduce 173 (src line 274)
+	Y_OR  reduce 173 (src line 274)
+	.  reduce 168 (src line 269)
+
+
+state 53
+	expr_logical_andor:  expr_logical_andor_left.ANDOR expr_logical_andor_right 
+
+	Y_AND  shift 114
+	Y_OR  shift 115
+	.  error
+
+	ANDOR  goto 113
+
+state 54
+	expr_logical_not:  Y_NOT.expr_logical_not_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr_agg  goto 120
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 117
+	expr_level0  goto 34
+	expr_level1  goto 121
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 118
+	expr_comp_left  goto 38
+	expr_logical_not  goto 119
+	expr_logical_not_right  goto 116
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 55
+	expr_iterable:  expr_ident.    (78)
+	expr_base:  expr_ident.    (94)
+	expr_func:  expr_ident.'(' expr_func_args_list ')' 
+	expr_self_left:  expr_ident.    (121)
+
+	'('  shift 122
+	'['  reduce 78 (src line 186)
+	Y_INC  reduce 121 (src line 220)
+	Y_DEC  reduce 121 (src line 220)
+	.  reduce 94 (src line 197)
+
+
+state 56
+	expr_base:  expr_str.    (95)
+
+	.  reduce 95 (src line 197)
+
+
+state 57
+	expr_base:  expr_num.    (96)
+	expr_numunit:  expr_num.expr_ident 
+
+	Y_IDENT  shift 72
+	.  reduce 96 (src line 197)
+
+	expr_ident  goto 123
+
+state 58
+	expr_base:  expr_bool.    (97)
+
+	.  reduce 97 (src line 197)
+
+
+state 59
+	expr_base:  expr_null.    (98)
+
+	.  reduce 98 (src line 197)
+
+
+state 60
+	expr_base:  expr_star.    (99)
+
+	.  reduce 99 (src line 197)
+
+
+state 61
+	expr_base:  expr_numunit.    (100)
+
+	.  reduce 100 (src line 197)
+
+
+state 62
+	expr_base:  expr_var.    (101)
+
+	.  reduce 101 (src line 197)
+
+
+state 63
+	expr_self:  expr_self_left.Y_INC 
+	expr_self:  expr_self_left.Y_DEC 
+
+	Y_INC  shift 124
+	Y_DEC  shift 125
+	.  error
+
+
+state 64
+	expr_negative:  '-'.expr_negative_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 128
+	expr_agg_level0  goto 127
+	expr_level0  goto 129
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 130
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_negative  goto 44
+	expr_negative_right  goto 126
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 65
+	expr_index:  expr_index_left.'[' expr_index_right ']' 
+
+	'['  shift 131
+	.  error
+
+
+state 66
+	expr_addsub:  expr_addsub_left.ADDSUB expr_addsub_right 
+
+	'+'  shift 133
+	'-'  shift 134
+	.  error
+
+	ADDSUB  goto 132
+
+state 67
+	expr_muldiv:  expr_muldiv_left.MULDIV expr_muldiv_right 
+
+	'*'  shift 136
+	'/'  shift 137
+	.  error
+
+	MULDIV  goto 135
+
+state 68
+	expr_modular:  expr_modular_left.'%' expr_modular_right 
+
+	'%'  shift 138
+	.  error
+
+
+state 69
+	expr_list:  '['.expr_list_item_list ']' 
+	expr_list_item_list: .    (134)
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  reduce 134 (src line 237)
+
+	expr  goto 25
+	expr_all  goto 141
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_list_item  goto 140
+	expr_list_item_list  goto 139
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 70
+	expr_dict:  '{'.expr_dict_pair_list '}' 
+	expr_dict_pair_list: .    (142)
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	.  reduce 142 (src line 246)
+
+	expr_ident  goto 145
+	expr_str  goto 146
+	expr_dict_pair  goto 143
+	expr_dict_pair_key  goto 144
+	expr_dict_pair_list  goto 142
+
+state 71
+	expr_addsub_left:  expr_agg_level0.    (148)
+	expr_muldiv_left:  expr_agg_level0.    (153)
+	expr_modular_left:  expr_agg_level0.    (157)
+	expr_in_left:  expr_agg_level0.    (163)
+
+	Y_IN  reduce 163 (src line 263)
+	'*'  reduce 153 (src line 255)
+	'/'  reduce 153 (src line 255)
+	'%'  reduce 157 (src line 257)
+	.  reduce 148 (src line 253)
+
+
+state 72
+	expr_ident:  Y_IDENT.    (104)
+
+	.  reduce 104 (src line 199)
+
+
+state 73
+	expr_str:  Y_STR.    (105)
+
+	.  reduce 105 (src line 200)
+
+
+state 74
+	expr_num:  expr_int.    (102)
+
+	.  reduce 102 (src line 198)
+
+
+state 75
+	expr_num:  expr_float.    (103)
+
+	.  reduce 103 (src line 198)
+
+
+state 76
+	expr_bool:  Y_BOOL.    (108)
+
+	.  reduce 108 (src line 203)
+
+
+state 77
+	expr_null:  Y_NULL.    (109)
+
+	.  reduce 109 (src line 204)
+
+
+state 78
+	expr_star:  '*'.    (110)
+
+	.  reduce 110 (src line 205)
+
+
+state 79
+	expr_var:  '$'.'(' expr_ident ')' 
+	expr_var:  '$'.'$' '(' expr_ident ')' 
+
+	'$'  shift 148
+	'('  shift 147
+	.  error
+
+
+state 80
+	expr_index_left:  expr_iterable.    (128)
+
+	.  reduce 128 (src line 231)
+
+
+state 81
+	expr_int:  Y_INT.    (106)
+
+	.  reduce 106 (src line 201)
+
+
+state 82
+	expr_float:  Y_FLOAT.    (107)
+
+	.  reduce 107 (src line 202)
+
+
+state 83
+	stmt_list:  stmt_list stmt_item.    (11)
+
+	.  reduce 11 (src line 137)
+
+
+state 84
+	stmt_from_list:  stmt_from_list.',' stmt_from_item 
+	stmt_from:  Y_FROM stmt_from_list.    (22)
+
+	','  shift 149
+	.  reduce 22 (src line 145)
+
+
+state 85
+	stmt_from_list:  stmt_from_item.    (20)
+
+	.  reduce 20 (src line 144)
+
+
+state 86
+	stmt_from_item:  expr_ident.    (17)
+
+	.  reduce 17 (src line 143)
+
+
+state 87
+	stmt_from_item:  expr_str.    (18)
+
+	.  reduce 18 (src line 143)
+
+
+state 88
+	stmt_from_item:  expr_var.    (19)
+
+	.  reduce 19 (src line 143)
+
+
+state 89
+	stmt_where:  Y_WHERE stmt_where_item.    (24)
+
+	.  reduce 24 (src line 148)
+
+
+state 90
+	stmt_whereby:  Y_WHERE Y_BY.stmt_groupby_list 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_groupby_item  goto 151
+	stmt_groupby_list  goto 150
+	stmt_as  goto 154
+	expr  goto 25
+	expr_all  goto 155
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 152
+	expr_str  goto 153
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 91
+	stmt_where_item:  expr_all.    (23)
+	expr_cond_left:  expr_all.    (184)
+
+	'?'  reduce 184 (src line 282)
+	.  reduce 23 (src line 147)
+
+
+state 92
+	stmt_groupby:  Y_GROUP Y_BY.stmt_groupby_list 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_groupby_item  goto 151
+	stmt_groupby_list  goto 156
+	stmt_as  goto 154
+	expr  goto 25
+	expr_all  goto 155
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 152
+	expr_str  goto 153
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 93
+	stmt_orderby:  Y_ORDER Y_BY.stmt_orderby_list 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	.  error
+
+	stmt_order  goto 158
+	stmt_order_item  goto 159
+	stmt_orderby_list  goto 157
+	expr_ident  goto 160
+	expr_str  goto 161
+
+state 94
+	stmt_limit_list:  stmt_limit_list.',' stmt_limit_item 
+	stmt_limit:  Y_LIMIT stmt_limit_list.    (44)
+
+	','  shift 162
+	.  reduce 44 (src line 163)
+
+
+state 95
+	stmt_limit_list:  stmt_limit_item.    (42)
+
+	.  reduce 42 (src line 162)
+
+
+state 96
+	stmt_limit_item:  expr_num.    (41)
+
+	.  reduce 41 (src line 161)
+
+
+state 97
+	stmt_having:  Y_HAVING stmt_having_item.    (46)
+
+	.  reduce 46 (src line 166)
+
+
+state 98
+	stmt_having_item:  expr_all.    (45)
+	expr_cond_left:  expr_all.    (184)
+
+	'?'  reduce 184 (src line 282)
+	.  reduce 45 (src line 165)
+
+
+state 99
+	stmt_select_list:  stmt_select_list ','.stmt_select_item 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_select_item  goto 163
+	stmt_as  goto 23
+	expr  goto 25
+	expr_all  goto 22
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 100
+	stmt_as:  expr_all Y_AS.expr_ident 
+	stmt_as:  expr_all Y_AS.expr_str 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	.  error
+
+	expr_ident  goto 164
+	expr_str  goto 165
+
+state 101
+	expr_all:  expr.    (52)
+	expr_agg:  '(' expr.')' 
+
+	')'  shift 166
+	.  reduce 52 (src line 173)
+
+
+state 102
+	expr_all:  expr_agg.    (51)
+	expr_agg:  '(' expr_agg.')' 
+	expr_agg_level0:  expr_agg.    (69)
+	expr_agg_level1:  expr_agg.    (71)
+	expr_iterable:  expr_agg.    (77)
+
+	Y_IN  reduce 69 (src line 181)
+	'?'  reduce 51 (src line 173)
+	')'  shift 167
+	'['  reduce 77 (src line 186)
+	'+'  reduce 69 (src line 181)
+	'-'  reduce 69 (src line 181)
+	'*'  reduce 69 (src line 181)
+	'/'  reduce 69 (src line 181)
+	'%'  reduce 69 (src line 181)
+	.  reduce 71 (src line 182)
+
+
+state 103
+	expr_cond_left:  expr_all.    (184)
+
+	.  reduce 184 (src line 282)
+
+
+state 104
+	expr_cond:  expr_cond_left '?'.expr_cond_middle ':' expr_cond_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr  goto 25
+	expr_all  goto 169
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+	expr_cond_middle  goto 168
+
+state 105
+	expr_comp:  expr_comp_left COMP.expr_comp_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 120
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 171
+	expr_level0  goto 34
+	expr_level1  goto 121
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp_right  goto 170
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 106
+	COMP:  '<'.    (88)
+
+	.  reduce 88 (src line 193)
+
+
+state 107
+	COMP:  '>'.    (89)
+
+	.  reduce 89 (src line 193)
+
+
+state 108
+	COMP:  Y_LE.    (90)
+
+	.  reduce 90 (src line 193)
+
+
+state 109
+	COMP:  Y_GE.    (91)
+
+	.  reduce 91 (src line 193)
+
+
+state 110
+	COMP:  Y_EQ.    (92)
+
+	.  reduce 92 (src line 193)
+
+
+state 111
+	COMP:  Y_NE.    (93)
+
+	.  reduce 93 (src line 193)
+
+
+state 112
+	expr_in:  expr_in_left Y_IN.expr_in_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 128
+	expr_agg_level0  goto 173
+	expr_level0  goto 129
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 174
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_negative  goto 44
+	expr_in_right  goto 172
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 113
+	expr_logical_andor:  expr_logical_andor_left ANDOR.expr_logical_andor_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr_agg  goto 120
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 176
+	expr_level0  goto 34
+	expr_level1  goto 121
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 177
+	expr_comp_left  goto 38
+	expr_logical_andor_right  goto 175
+	expr_logical_not  goto 178
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 114
+	ANDOR:  Y_AND.    (86)
+
+	.  reduce 86 (src line 192)
+
+
+state 115
+	ANDOR:  Y_OR.    (87)
+
+	.  reduce 87 (src line 192)
+
+
+state 116
+	expr_logical_not:  Y_NOT expr_logical_not_right.    (183)
+
+	.  reduce 183 (src line 278)
+
+
+state 117
+	expr_comp_left:  expr_agg_level1.    (168)
+	expr_logical_not_right:  expr_agg_level1.    (179)
+
+	'<'  reduce 168 (src line 269)
+	'>'  reduce 168 (src line 269)
+	Y_EQ  reduce 168 (src line 269)
+	Y_NE  reduce 168 (src line 269)
+	Y_LE  reduce 168 (src line 269)
+	Y_GE  reduce 168 (src line 269)
+	.  reduce 179 (src line 276)
+
+
+state 118
+	expr_logical_not_right:  expr_comp.    (180)
+
+	.  reduce 180 (src line 276)
+
+
+state 119
+	expr_logical_not_right:  expr_logical_not.    (181)
+
+	.  reduce 181 (src line 276)
+
+
+state 120
+	expr_agg_level0:  expr_agg.    (69)
+	expr_agg_level1:  expr_agg.    (71)
+	expr_iterable:  expr_agg.    (77)
+
+	Y_IN  reduce 69 (src line 181)
+	'['  reduce 77 (src line 186)
+	'+'  reduce 69 (src line 181)
+	'-'  reduce 69 (src line 181)
+	'*'  reduce 69 (src line 181)
+	'/'  reduce 69 (src line 181)
+	'%'  reduce 69 (src line 181)
+	.  reduce 71 (src line 182)
+
+
+state 121
+	expr_agg_level1:  expr_level1.    (72)
+
+	.  reduce 72 (src line 182)
+
+
+state 122
+	expr_func:  expr_ident '('.expr_func_args_list ')' 
+	expr_func_args_list: .    (118)
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	Y_UNIQUE  shift 184
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  reduce 118 (src line 214)
+
+	stmt_as  goto 183
+	stmt_unique  goto 182
+	expr  goto 25
+	expr_all  goto 181
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_func_args  goto 180
+	expr_func_args_list  goto 179
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 123
+	expr_numunit:  expr_num expr_ident.    (111)
+
+	.  reduce 111 (src line 206)
+
+
+state 124
+	expr_self:  expr_self_left Y_INC.    (124)
+
+	.  reduce 124 (src line 221)
+
+
+state 125
+	expr_self:  expr_self_left Y_DEC.    (125)
+
+	.  reduce 125 (src line 223)
+
+
+state 126
+	expr_negative:  '-' expr_negative_right.    (127)
+
+	.  reduce 127 (src line 227)
+
+
+state 127
+	expr_negative_right:  expr_agg_level0.    (126)
+
+	.  reduce 126 (src line 226)
+
+
+state 128
+	expr_agg_level0:  expr_agg.    (69)
+	expr_iterable:  expr_agg.    (77)
+
+	'['  reduce 77 (src line 186)
+	.  reduce 69 (src line 181)
+
+
+state 129
+	expr_agg_level0:  expr_level0.    (70)
+
+	.  reduce 70 (src line 181)
+
+
+state 130
+	expr_iterable:  expr_listdict.    (81)
+
+	.  reduce 81 (src line 186)
+
+
+state 131
+	expr_index:  expr_index_left '['.expr_index_right ']' 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 128
+	expr_agg_level0  goto 186
+	expr_level0  goto 129
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 130
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 187
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_index_right  goto 185
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 132
+	expr_addsub:  expr_addsub_left ADDSUB.expr_addsub_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 128
+	expr_agg_level0  goto 189
+	expr_level0  goto 129
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 130
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_addsub_right  goto 188
+	expr_muldiv  goto 190
+	expr_muldiv_left  goto 67
+	expr_modular  goto 191
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 133
+	ADDSUB:  '+'.    (82)
+
+	.  reduce 82 (src line 190)
+
+
+state 134
+	ADDSUB:  '-'.    (83)
+
+	.  reduce 83 (src line 190)
+
+
+state 135
+	expr_muldiv:  expr_muldiv_left MULDIV.expr_muldiv_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 128
+	expr_agg_level0  goto 193
+	expr_level0  goto 129
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 130
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_muldiv_right  goto 192
+	expr_modular  goto 194
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 136
+	MULDIV:  '*'.    (84)
+
+	.  reduce 84 (src line 191)
+
+
+state 137
+	MULDIV:  '/'.    (85)
+
+	.  reduce 85 (src line 191)
+
+
+state 138
+	expr_modular:  expr_modular_left '%'.expr_modular_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	.  error
+
+	expr_agg  goto 128
+	expr_agg_level0  goto 196
+	expr_level0  goto 129
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 130
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_modular_right  goto 195
+	expr_negative  goto 44
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+
+state 139
+	expr_list:  '[' expr_list_item_list.']' 
+	expr_list_item_list:  expr_list_item_list.',' expr_list_item 
+
+	','  shift 198
+	']'  shift 197
+	.  error
+
+
+state 140
+	expr_list_item_list:  expr_list_item.    (135)
+
+	.  reduce 135 (src line 239)
+
+
+state 141
+	expr_list_item:  expr_all.    (133)
+	expr_cond_left:  expr_all.    (184)
+
+	'?'  reduce 184 (src line 282)
+	.  reduce 133 (src line 236)
+
+
+state 142
+	expr_dict:  '{' expr_dict_pair_list.'}' 
+	expr_dict_pair_list:  expr_dict_pair_list.',' expr_dict_pair 
+
+	','  shift 200
+	'}'  shift 199
+	.  error
+
+
+state 143
+	expr_dict_pair_list:  expr_dict_pair.    (143)
+
+	.  reduce 143 (src line 248)
+
+
+state 144
+	expr_dict_pair:  expr_dict_pair_key.':' expr_dict_pair_value 
+
+	':'  shift 201
+	.  error
+
+
+state 145
+	expr_dict_pair_key:  expr_ident.    (139)
+
+	.  reduce 139 (src line 244)
+
+
+state 146
+	expr_dict_pair_key:  expr_str.    (140)
+
+	.  reduce 140 (src line 244)
+
+
+state 147
+	expr_var:  '$' '('.expr_ident ')' 
+
+	Y_IDENT  shift 72
+	.  error
+
+	expr_ident  goto 202
+
+state 148
+	expr_var:  '$' '$'.'(' expr_ident ')' 
+
+	'('  shift 203
+	.  error
+
+
+state 149
+	stmt_from_list:  stmt_from_list ','.stmt_from_item 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	'$'  shift 79
+	.  error
+
+	stmt_from_item  goto 204
+	expr_var  goto 88
+	expr_ident  goto 86
+	expr_str  goto 87
+
+state 150
+	stmt_whereby:  Y_WHERE Y_BY stmt_groupby_list.    (25)
+	stmt_groupby_list:  stmt_groupby_list.',' stmt_groupby_item 
+
+	','  shift 205
+	.  reduce 25 (src line 149)
+
+
+state 151
+	stmt_groupby_list:  stmt_groupby_item.    (29)
+
+	.  reduce 29 (src line 152)
+
+
+state 152
+	stmt_groupby_item:  expr_ident.    (26)
+	expr_iterable:  expr_ident.    (78)
+	expr_base:  expr_ident.    (94)
+	expr_func:  expr_ident.'(' expr_func_args_list ')' 
+	expr_self_left:  expr_ident.    (121)
+
+	$end  reduce 26 (src line 151)
+	Y_FROM  reduce 26 (src line 151)
+	Y_WHERE  reduce 26 (src line 151)
+	Y_GROUP  reduce 26 (src line 151)
+	Y_ORDER  reduce 26 (src line 151)
+	Y_LIMIT  reduce 26 (src line 151)
+	Y_HAVING  reduce 26 (src line 151)
+	','  reduce 26 (src line 151)
+	'('  shift 122
+	'['  reduce 78 (src line 186)
+	Y_INC  reduce 121 (src line 220)
+	Y_DEC  reduce 121 (src line 220)
+	.  reduce 94 (src line 197)
+
+
+state 153
+	stmt_groupby_item:  expr_str.    (27)
+	expr_base:  expr_str.    (95)
+
+	$end  reduce 27 (src line 151)
+	Y_FROM  reduce 27 (src line 151)
+	Y_WHERE  reduce 27 (src line 151)
+	Y_GROUP  reduce 27 (src line 151)
+	Y_ORDER  reduce 27 (src line 151)
+	Y_LIMIT  reduce 27 (src line 151)
+	Y_HAVING  reduce 27 (src line 151)
+	','  reduce 27 (src line 151)
+	.  reduce 95 (src line 197)
+
+
+state 154
+	stmt_groupby_item:  stmt_as.    (28)
+
+	.  reduce 28 (src line 151)
+
+
+state 155
+	stmt_as:  expr_all.Y_AS expr_ident 
+	stmt_as:  expr_all.Y_AS expr_str 
+	expr_cond_left:  expr_all.    (184)
+
+	Y_AS  shift 100
+	.  reduce 184 (src line 282)
+
+
+state 156
+	stmt_groupby_list:  stmt_groupby_list.',' stmt_groupby_item 
+	stmt_groupby:  Y_GROUP Y_BY stmt_groupby_list.    (31)
+
+	','  shift 205
+	.  reduce 31 (src line 153)
+
+
+state 157
+	stmt_orderby_list:  stmt_orderby_list.',' stmt_order 
+	stmt_orderby:  Y_ORDER Y_BY stmt_orderby_list.    (40)
+
+	','  shift 206
+	.  reduce 40 (src line 159)
+
+
+state 158
+	stmt_orderby_list:  stmt_order.    (38)
+
+	.  reduce 38 (src line 158)
+
+
+state 159
+	stmt_order:  stmt_order_item.stmt_order_order 
+	stmt_order_order: .    (34)
+
+	Y_DESC  shift 208
+	Y_ASC  shift 209
+	.  reduce 34 (src line 156)
+
+	stmt_order_order  goto 207
+
+state 160
+	stmt_order_item:  expr_ident.    (32)
+
+	.  reduce 32 (src line 155)
+
+
+state 161
+	stmt_order_item:  expr_str.    (33)
+
+	.  reduce 33 (src line 155)
+
+
+state 162
+	stmt_limit_list:  stmt_limit_list ','.stmt_limit_item 
+
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	.  error
+
+	stmt_limit_item  goto 210
+	expr_num  goto 96
+	expr_int  goto 74
+	expr_float  goto 75
+
+state 163
+	stmt_select_list:  stmt_select_list ',' stmt_select_item.    (15)
+
+	.  reduce 15 (src line 140)
+
+
+state 164
+	stmt_as:  expr_all Y_AS expr_ident.    (47)
+
+	.  reduce 47 (src line 168)
+
+
+state 165
+	stmt_as:  expr_all Y_AS expr_str.    (48)
+
+	.  reduce 48 (src line 168)
+
+
+state 166
+	expr_agg:  '(' expr ')'.    (53)
+
+	.  reduce 53 (src line 174)
+
+
+state 167
+	expr_agg:  '(' expr_agg ')'.    (54)
+
+	.  reduce 54 (src line 174)
+
+
+state 168
+	expr_cond:  expr_cond_left '?' expr_cond_middle.':' expr_cond_right 
+
+	':'  shift 211
+	.  error
+
+
+state 169
+	expr_cond_left:  expr_all.    (184)
+	expr_cond_middle:  expr_all.    (185)
+
+	':'  reduce 185 (src line 283)
+	.  reduce 184 (src line 282)
+
+
+state 170
+	expr_comp:  expr_comp_left COMP expr_comp_right.    (170)
+
+	.  reduce 170 (src line 271)
+
+
+state 171
+	expr_comp_right:  expr_agg_level1.    (169)
+
+	.  reduce 169 (src line 270)
+
+
+state 172
+	expr_in:  expr_in_left Y_IN expr_in_right.    (167)
+
+	.  reduce 167 (src line 265)
+
+
+state 173
+	expr_in_right:  expr_agg_level0.    (165)
+
+	.  reduce 165 (src line 264)
+
+
+state 174
+	expr_iterable:  expr_listdict.    (81)
+	expr_in_right:  expr_listdict.    (166)
+
+	'['  reduce 81 (src line 186)
+	.  reduce 166 (src line 264)
+
+
+state 175
+	expr_logical_andor:  expr_logical_andor_left ANDOR expr_logical_andor_right.    (182)
+
+	.  reduce 182 (src line 277)
+
+
+state 176
+	expr_comp_left:  expr_agg_level1.    (168)
+	expr_logical_andor_right:  expr_agg_level1.    (176)
+
+	'<'  reduce 168 (src line 269)
+	'>'  reduce 168 (src line 269)
+	Y_EQ  reduce 168 (src line 269)
+	Y_NE  reduce 168 (src line 269)
+	Y_LE  reduce 168 (src line 269)
+	Y_GE  reduce 168 (src line 269)
+	.  reduce 176 (src line 275)
+
+
+state 177
+	expr_logical_andor_right:  expr_comp.    (177)
+
+	.  reduce 177 (src line 275)
+
+
+state 178
+	expr_logical_andor_right:  expr_logical_not.    (178)
+
+	.  reduce 178 (src line 275)
+
+
+state 179
+	expr_func:  expr_ident '(' expr_func_args_list.')' 
+	expr_func_args_list:  expr_func_args_list.',' expr_func_args 
+
+	','  shift 213
+	')'  shift 212
+	.  error
+
+
+state 180
+	expr_func_args_list:  expr_func_args.    (119)
+
+	.  reduce 119 (src line 216)
+
+
+state 181
+	stmt_as:  expr_all.Y_AS expr_ident 
+	stmt_as:  expr_all.Y_AS expr_str 
+	expr_func_args:  expr_all.    (115)
+	expr_cond_left:  expr_all.    (184)
+
+	Y_AS  shift 100
+	'?'  reduce 184 (src line 282)
+	.  reduce 115 (src line 213)
+
+
+state 182
+	expr_func_args:  stmt_unique.    (116)
+
+	.  reduce 116 (src line 213)
+
+
+state 183
+	expr_func_args:  stmt_as.    (117)
+
+	.  reduce 117 (src line 213)
+
+
+state 184
+	stmt_unique:  Y_UNIQUE.expr_all 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr  goto 25
+	expr_all  goto 214
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 185
+	expr_index:  expr_index_left '[' expr_index_right.']' 
+
+	']'  shift 215
+	.  error
+
+
+state 186
+	expr_index_right:  expr_agg_level0.    (129)
+	expr_addsub_left:  expr_agg_level0.    (148)
+	expr_muldiv_left:  expr_agg_level0.    (153)
+	expr_modular_left:  expr_agg_level0.    (157)
+
+	']'  reduce 129 (src line 232)
+	'*'  reduce 153 (src line 255)
+	'/'  reduce 153 (src line 255)
+	'%'  reduce 157 (src line 257)
+	.  reduce 148 (src line 253)
+
+
+state 187
+	expr_index_right:  expr_arithmetic.    (130)
+	expr_addsub_left:  expr_arithmetic.    (149)
+
+	']'  reduce 130 (src line 232)
+	.  reduce 149 (src line 253)
+
+
+state 188
+	expr_addsub:  expr_addsub_left ADDSUB expr_addsub_right.    (160)
+
+	.  reduce 160 (src line 259)
+
+
+state 189
+	expr_addsub_right:  expr_agg_level0.    (150)
+	expr_muldiv_left:  expr_agg_level0.    (153)
+	expr_modular_left:  expr_agg_level0.    (157)
+
+	'*'  reduce 153 (src line 255)
+	'/'  reduce 153 (src line 255)
+	'%'  reduce 157 (src line 257)
+	.  reduce 150 (src line 254)
+
+
+state 190
+	expr_addsub_right:  expr_muldiv.    (151)
+	expr_muldiv_left:  expr_muldiv.    (154)
+
+	'*'  reduce 154 (src line 255)
+	'/'  reduce 154 (src line 255)
+	.  reduce 151 (src line 254)
+
+
+state 191
+	expr_addsub_right:  expr_modular.    (152)
+	expr_modular_left:  expr_modular.    (158)
+
+	'%'  reduce 158 (src line 257)
+	.  reduce 152 (src line 254)
+
+
+state 192
+	expr_muldiv:  expr_muldiv_left MULDIV expr_muldiv_right.    (161)
+
+	.  reduce 161 (src line 260)
+
+
+state 193
+	expr_muldiv_right:  expr_agg_level0.    (155)
+	expr_modular_left:  expr_agg_level0.    (157)
+
+	'%'  reduce 157 (src line 257)
+	.  reduce 155 (src line 256)
+
+
+state 194
+	expr_muldiv_right:  expr_modular.    (156)
+	expr_modular_left:  expr_modular.    (158)
+
+	'%'  reduce 158 (src line 257)
+	.  reduce 156 (src line 256)
+
+
+state 195
+	expr_modular:  expr_modular_left '%' expr_modular_right.    (162)
+
+	.  reduce 162 (src line 261)
+
+
+state 196
+	expr_modular_right:  expr_agg_level0.    (159)
+
+	.  reduce 159 (src line 258)
+
+
+state 197
+	expr_list:  '[' expr_list_item_list ']'.    (132)
+
+	.  reduce 132 (src line 235)
+
+
+state 198
+	expr_list_item_list:  expr_list_item_list ','.expr_list_item 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr  goto 25
+	expr_all  goto 141
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_list_item  goto 216
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 199
+	expr_dict:  '{' expr_dict_pair_list '}'.    (137)
+
+	.  reduce 137 (src line 242)
+
+
+state 200
+	expr_dict_pair_list:  expr_dict_pair_list ','.expr_dict_pair 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	.  error
+
+	expr_ident  goto 145
+	expr_str  goto 146
+	expr_dict_pair  goto 217
+	expr_dict_pair_key  goto 144
+
+state 201
+	expr_dict_pair:  expr_dict_pair_key ':'.expr_dict_pair_value 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr  goto 25
+	expr_all  goto 219
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_dict_pair_value  goto 218
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 202
+	expr_var:  '$' '(' expr_ident.')' 
+
+	')'  shift 220
+	.  error
+
+
+state 203
+	expr_var:  '$' '$' '('.expr_ident ')' 
+
+	Y_IDENT  shift 72
+	.  error
+
+	expr_ident  goto 221
+
+state 204
+	stmt_from_list:  stmt_from_list ',' stmt_from_item.    (21)
+
+	.  reduce 21 (src line 144)
+
+
+state 205
+	stmt_groupby_list:  stmt_groupby_list ','.stmt_groupby_item 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_groupby_item  goto 222
+	stmt_as  goto 154
+	expr  goto 25
+	expr_all  goto 155
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 152
+	expr_str  goto 153
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 206
+	stmt_orderby_list:  stmt_orderby_list ','.stmt_order 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	.  error
+
+	stmt_order  goto 223
+	stmt_order_item  goto 159
+	expr_ident  goto 160
+	expr_str  goto 161
+
+state 207
+	stmt_order:  stmt_order_item stmt_order_order.    (37)
+
+	.  reduce 37 (src line 157)
+
+
+state 208
+	stmt_order_order:  Y_DESC.    (35)
+
+	.  reduce 35 (src line 156)
+
+
+state 209
+	stmt_order_order:  Y_ASC.    (36)
+
+	.  reduce 36 (src line 156)
+
+
+state 210
+	stmt_limit_list:  stmt_limit_list ',' stmt_limit_item.    (43)
+
+	.  reduce 43 (src line 162)
+
+
+state 211
+	expr_cond:  expr_cond_left '?' expr_cond_middle ':'.expr_cond_right 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	expr_agg  goto 226
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_agg_level2  goto 225
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 227
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_cond_right  goto 224
+
+state 212
+	expr_func:  expr_ident '(' expr_func_args_list ')'.    (114)
+
+	.  reduce 114 (src line 212)
+
+
+state 213
+	expr_func_args_list:  expr_func_args_list ','.expr_func_args 
+
+	Y_IDENT  shift 72
+	Y_STR  shift 73
+	Y_INT  shift 81
+	Y_FLOAT  shift 82
+	Y_BOOL  shift 76
+	Y_NULL  shift 77
+	Y_UNIQUE  shift 184
+	'$'  shift 79
+	'('  shift 26
+	'['  shift 69
+	'{'  shift 70
+	'-'  shift 64
+	'*'  shift 78
+	Y_NOT  shift 54
+	.  error
+
+	stmt_as  goto 183
+	stmt_unique  goto 182
+	expr  goto 25
+	expr_all  goto 181
+	expr_agg  goto 24
+	expr_agg_level0  goto 71
+	expr_agg_level1  goto 52
+	expr_level0  goto 34
+	expr_level1  goto 30
+	expr_level2  goto 28
+	expr_level3  goto 27
+	expr_iterable  goto 80
+	expr_base  goto 41
+	expr_var  goto 62
+	expr_ident  goto 55
+	expr_str  goto 56
+	expr_num  goto 57
+	expr_int  goto 74
+	expr_float  goto 75
+	expr_bool  goto 58
+	expr_null  goto 59
+	expr_star  goto 60
+	expr_numunit  goto 61
+	expr_listdict  goto 36
+	expr_list  goto 49
+	expr_dict  goto 50
+	expr_arithmetic  goto 35
+	expr_addsub  goto 46
+	expr_addsub_left  goto 66
+	expr_muldiv  goto 47
+	expr_muldiv_left  goto 67
+	expr_modular  goto 48
+	expr_modular_left  goto 68
+	expr_negative  goto 44
+	expr_comp  goto 31
+	expr_comp_left  goto 38
+	expr_logical  goto 32
+	expr_logical_andor  goto 39
+	expr_logical_andor_left  goto 53
+	expr_logical_not  goto 40
+	expr_in  goto 37
+	expr_in_left  goto 51
+	expr_index  goto 45
+	expr_index_left  goto 65
+	expr_self  goto 43
+	expr_self_left  goto 63
+	expr_func  goto 42
+	expr_func_args  goto 228
+	expr_cond  goto 29
+	expr_cond_left  goto 33
+
+state 214
+	stmt_unique:  Y_UNIQUE expr_all.    (49)
+	expr_cond_left:  expr_all.    (184)
+
+	'?'  reduce 184 (src line 282)
+	.  reduce 49 (src line 169)
+
+
+state 215
+	expr_index:  expr_index_left '[' expr_index_right ']'.    (131)
+
+	.  reduce 131 (src line 233)
+
+
+state 216
+	expr_list_item_list:  expr_list_item_list ',' expr_list_item.    (136)
+
+	.  reduce 136 (src line 240)
+
+
+state 217
+	expr_dict_pair_list:  expr_dict_pair_list ',' expr_dict_pair.    (144)
+
+	.  reduce 144 (src line 249)
+
+
+state 218
+	expr_dict_pair:  expr_dict_pair_key ':' expr_dict_pair_value.    (138)
+
+	.  reduce 138 (src line 243)
+
+
+state 219
+	expr_dict_pair_value:  expr_all.    (141)
+	expr_cond_left:  expr_all.    (184)
+
+	'?'  reduce 184 (src line 282)
+	.  reduce 141 (src line 245)
+
+
+state 220
+	expr_var:  '$' '(' expr_ident ')'.    (112)
+
+	.  reduce 112 (src line 207)
+
+
+state 221
+	expr_var:  '$' '$' '(' expr_ident.')' 
+
+	')'  shift 229
+	.  error
+
+
+state 222
+	stmt_groupby_list:  stmt_groupby_list ',' stmt_groupby_item.    (30)
+
+	.  reduce 30 (src line 152)
+
+
+state 223
+	stmt_orderby_list:  stmt_orderby_list ',' stmt_order.    (39)
+
+	.  reduce 39 (src line 158)
+
+
+state 224
+	expr_cond:  expr_cond_left '?' expr_cond_middle ':' expr_cond_right.    (187)
+
+	.  reduce 187 (src line 285)
+
+
+state 225
+	expr_cond_right:  expr_agg_level2.    (186)
+
+	.  reduce 186 (src line 284)
+
+
+state 226
+	expr_agg_level0:  expr_agg.    (69)
+	expr_agg_level1:  expr_agg.    (71)
+	expr_agg_level2:  expr_agg.    (73)
+	expr_iterable:  expr_agg.    (77)
+
+	Y_IN  reduce 69 (src line 181)
+	'['  reduce 77 (src line 186)
+	'+'  reduce 69 (src line 181)
+	'-'  reduce 69 (src line 181)
+	'*'  reduce 69 (src line 181)
+	'/'  reduce 69 (src line 181)
+	'%'  reduce 69 (src line 181)
+	'<'  reduce 71 (src line 182)
+	'>'  reduce 71 (src line 182)
+	Y_EQ  reduce 71 (src line 182)
+	Y_NE  reduce 71 (src line 182)
+	Y_LE  reduce 71 (src line 182)
+	Y_GE  reduce 71 (src line 182)
+	Y_AND  reduce 71 (src line 182)
+	Y_OR  reduce 71 (src line 182)
+	.  reduce 73 (src line 183)
+
+
+state 227
+	expr_agg_level2:  expr_level2.    (74)
+
+	.  reduce 74 (src line 183)
+
+
+state 228
+	expr_func_args_list:  expr_func_args_list ',' expr_func_args.    (120)
+
+	.  reduce 120 (src line 217)
+
+
+state 229
+	expr_var:  '$' '$' '(' expr_ident ')'.    (113)
+
+	.  reduce 113 (src line 209)
+
+
+54 terminals, 100 nonterminals
+188 grammar rules, 230/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+149 working sets used
+memory: parser 1649/120000
+124 extra closures
+406 shift entries, 140 exceptions
+197 goto entries
+922 entries saved by goto default
+Optimizer space used: output 319/120000
+319 table entries, 9 zero
+maximum spread: 54, maximum offset: 213

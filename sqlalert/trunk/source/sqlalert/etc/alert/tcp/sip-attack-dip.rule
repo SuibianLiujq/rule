@@ -1,0 +1,50 @@
+# This file defines the rule(action) to detec SYN_ATTACK event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "alert/tcp/cfg/sip-attack-dip.rule";
+
+
+# Check configurations.
+# 
+# range      - Time range to detect from the past to now.
+# output     - Output method.
+# subtype    - Alert subtype.
+# level      - Alert level.
+if !is_str(range)     { range   = "5m"; }
+if !is_str(output)    { output  = "es"; }
+if !is_str(subtype)   { subtype = "SYN_ATTACK"; }
+if !is_str(level)     { level   = "EMERGENCY"; }
+if !is_num(k_fps)     { k_fps   = 1; }
+
+
+# Appending 'type', 'subtype' and '@timestamp' to all of the alert result.
+#
+# For 'email' output 'type' and 'subtype' will be ignored.
+__alert_append__ = { "type": "TCP", "subtype": subtype, "@timestamp": time("T") };
+
+
+# Execute the rule and output the alert result.
+include "alert/tcp/rule/sip-attack-dip.rule";
+result = exec_rule(k_fps);
+if is_empty(result) { exit(); }
+
+
+# Output alert result.
+#
+# __level__      - Use level description of 'email' output.
+# __level_list__ - A list used to map level for each item in result list.
+# __level_keys__ - A list of keys to map the level.
+# __output__     - Output method.
+# __owner_key__  - Key use to search owners email.
+# __fields__     - Fileds to format.
+__level__      = level;
+__level_list__ = level_list;
+__level_keys__ = "fps";
+__output__     = output;
+__owner_key__  = "sip";
+__fields__     = [ "@timestamp", "node", "sip", "dip", "dport", "status", "fps", "owner", "level" ];
+
+
+include "cfg/output.rule";
+output(result, __fields__, "ip");
+

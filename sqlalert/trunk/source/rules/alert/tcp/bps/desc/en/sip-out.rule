@@ -1,0 +1,46 @@
+# ########################################################################
+# This file define the description of the rule.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Check out 'threshold value' and 'threshold operator'.
+#
+# Check for:
+# 1. __threshold__;
+# 2. __threshold_value__ & __threshold_operator__;
+# 3. __condition__['threshold'] & __condition__['operator'];
+#
+# ========================================================================
+th_opt = ">=";
+if __threshold__ {
+	th_value = __threshold__;
+} else if __threshold_value__ {
+	th_value = __threshold_value__;
+	if __threshold_operator__ {
+		th_opt = __threshold_operator__;
+	}
+} else if __condition__ {
+	th_value = __condition__["threshold"];
+	if __condition__["operator"] {
+		th_opt = __condition__["operator"];
+	}
+}
+
+
+# ========================================================================
+# Configuration of email titles.
+#
+# __desc_type__:    Description of TYPE.
+# __desc_subtype__: Details.
+# __desc_action__:  Dealing with the alerting.
+# __desc_title__:   Title of email.
+# ========================================================================
+__desc_type__    = "[TCP] Out (Upload) bps of SIP Detection";
+__desc_subtype__ = "Out (Upload) bps of SIP %(th_opt) "
+                 + fmt_bits(th_value) + ".";
+__desc_action__  = "Please check it out.";
+__desc_title__   = __desc_type__ + ": " + __desc_subtype__;
+

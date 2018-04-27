@@ -1,0 +1,52 @@
+# This file defines the fileds description of iTAP metadata.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# All fields used by iTAP metadata.
+#
+# @desc: Description of the field.
+# @fmt:  Format of the field. Use raw type if @fmt not set.
+__fields_list__ = {
+	"@timestamp":          { "desc": "时间戳" },
+	"node":                { "desc": "iTAP 探点" },
+	"index":               { "desc": "索引名" },
+	"owner":               { "desc": "责任人" },
+	"owner_sip":           { "desc": "源 IP 责任人" },
+	"owner_dip":           { "desc": "目的 IP 责任人" },
+	"owner_node":          { "desc": "iTAP 探点责任人" },
+	"reason":              { "desc": "原因" },
+	"level":               { "desc": "等级" },
+	"sip":                 { "desc": "源IP" },
+	"status":              { "desc": "状态" },
+	"status_flow":         { "desc": "流结束状态" },
+	"dip":                 { "desc": "目的 IP" },
+	"sport":               { "desc": "源端口" },
+	"dport":               { "desc": "目的端口" },
+	"protocol":            { "desc": "协议" },
+	"count_sip":           { "desc": "源 IP 个数",            "fmt": "int" },
+	"count_dip":           { "desc": "目的 IP 个数",          "fmt": "int" },
+	"count_sport":         { "desc": "源端口个数",            "fmt": "int" },
+	"count_dport":         { "desc": "目的端口个数",          "fmt": "int" },
+	"bytes":               { "desc": "字节数",                "fmt": "bytes" },
+	"bytes_in":            { "desc": "IN 字节数",             "fmt": "bytes" },
+	"bytes_out":           { "desc": "OUT 字节数",            "fmt": "bytes" },
+	"packets":             { "desc": "包数",                  "fmt": "int" },
+	"packets_in":          { "desc": "IN 包数",               "fmt": "int" },
+	"packets_out":         { "desc": "OUT 包数",              "fmt": "int" },
+	"packets_r":           { "desc": "重传包数",              "fmt": "int" },
+	"packets_r_in":        { "desc": "IN 重传包数",           "fmt": "int" },
+	"packets_r_out":       { "desc": "OUT 重传包数",          "fmt": "int" },
+	"flows":               { "desc": "流个数",                "fmt": "int" },
+	"requests":            { "desc": "请求数",                "fmt": "int" },
+	"bps":                 { "desc": "每秒比特数",            "fmt": "bits" },
+	"Bps":                 { "desc": "每秒字节数",            "fmt": "bytes" },
+	"BPS":                 { "desc": "每秒字节数",            "fmt": "bytes" },
+	"pps":                 { "desc": "每秒包数",              "fmt": "int" },
+	"PPS":                 { "desc": "每秒包数",              "fmt": "int" },
+	"fps":                 { "desc": "每秒流个数",            "fmt": "int" },
+	"fps_syn":             { "desc": "每秒 SYN 超时数",       "fmt": "int" },
+	"fps_ack":             { "desc": "每秒 SYN_ACK 超时数",   "fmt": "int" },
+	"duration":            { "desc": "持续时间",              "fmt": "time_us" }
+};
+

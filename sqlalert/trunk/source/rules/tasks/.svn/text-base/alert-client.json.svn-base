@@ -1,0 +1,158 @@
+{
+	"itap": {
+		"enable": true,
+		"runOnStart": true,
+		"interval": 300,
+		"file": [
+			"alert/itap/nodata-index.rule",
+			"alert/itap/nodata-link.rule"
+		]
+	},
+
+	"tcp-bps": {
+		"enable": true,
+		"runOnStart": true,
+		"interval": 300,
+		"file": [
+			"alert/tcp/bps/sip.rule",
+			"alert/tcp/bps/sip-in.rule",
+			"alert/tcp/bps/sip-out.rule",
+			"alert/tcp/bps/sip-dip.rule",
+			"alert/tcp/bps/sip-dip-in.rule",
+			"alert/tcp/bps/sip-dip-out.rule",
+			"alert/tcp/bps/sip-dip-dport.rule",
+			"alert/tcp/bps/sip-dip-dport-in.rule",
+			"alert/tcp/bps/sip-dip-dport-out.rule",
+			"alert/tcp/bps/sip-dport.rule",
+			"alert/tcp/bps/sip-dport-in.rule",
+			"alert/tcp/bps/sip-dport-out.rule"
+		]
+	},
+
+	"tcp-flows": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/tcp/flows/sip-normal.rule",
+			"alert/tcp/flows/sip-rst.rule",
+			"alert/tcp/flows/sip-syn.rule",
+			"alert/tcp/flows/sip-synack.rule",
+			"alert/tcp/flows/sip-dip-normal.rule",
+			"alert/tcp/flows/sip-dip-rst.rule",
+			"alert/tcp/flows/sip-dip-syn.rule",
+			"alert/tcp/flows/sip-dip-synack.rule",
+			"alert/tcp/flows/sip-dip-dport-normal.rule",
+			"alert/tcp/flows/sip-dip-dport-rst.rule",
+			"alert/tcp/flows/sip-dip-dport-syn.rule",
+			"alert/tcp/flows/sip-dip-dport-synack.rule",
+			"alert/tcp/flows/sip-dport-normal.rule",
+			"alert/tcp/flows/sip-dport-rst.rule",
+			"alert/tcp/flows/sip-dport-syn.rule",
+			"alert/tcp/flows/sip-dport-synack.rule",
+			"alert/tcp/flows/sip-scan-dip.rule",
+			"alert/tcp/flows/sip-scan-dport.rule"
+		]
+	},
+
+	"tcp-latency": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/tcp/latency/sip.rule",
+			"alert/tcp/latency/sip-dip.rule",
+			"alert/tcp/latency/sip-dip-dport.rule",
+			"alert/tcp/latency/sip-dport.rule"
+		]
+	},
+
+	"tcp-out-of-order": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/tcp/out-of-order/sip.rule",
+			"alert/tcp/out-of-order/sip-dip.rule",
+			"alert/tcp/out-of-order/sip-dip-dport.rule",
+			"alert/tcp/out-of-order/sip-dport.rule"
+		]
+	},
+
+	"tcp-retransmit": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/tcp/retransmit/sip.rule",
+			"alert/tcp/retransmit/sip-dip.rule",
+			"alert/tcp/retransmit/sip-dip-dport.rule",
+			"alert/tcp/retransmit/sip-dport.rule"
+		]
+	},
+
+	"udp-bps": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/udp/bps/total.rule"
+		]
+	},
+
+	"http-flows": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/http/flows/sip.rule",
+			"alert/http/flows/sip-dip.rule",
+			"alert/http/flows/sip-url.rule"
+		]
+	},
+
+	"http-latency": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/http/latency/sip-url.rule"
+		]
+	},
+
+	"http-status": {
+		"enable": true,
+		"runOnStart":true,
+		"interval": 300,
+		"file": [
+			"alert/http/status/sip.rule",
+			"alert/http/status/sip-dip.rule",
+			"alert/http/status/sip-url.rule"
+		]
+	},
+
+	"dns_flows": {
+		"enable": true,
+		"runOnStart": true,
+		"interval": 300,
+		"file": [
+			"alert/dns/flows/sip.rule",
+			"alert/dns/flows/sip-dip.rule",
+			"alert/dns/flows/sip-domain.rule",
+			"alert/dns/flows/domain.rule",
+			"alert/dns/flows/total.rule"
+		]
+	},
+
+	"dns_retcode": {
+		"enable": true,
+		"runOnStart": true,
+		"interval": 300,
+		"file": [
+			"alert/dns/retcode/sip.rule",
+			"alert/dns/retcode/sip-dip.rule",
+			"alert/dns/retcode/sip-domain.rule",
+			"alert/dns/retcode/domain.rule"
+		]
+	}
+}

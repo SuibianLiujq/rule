@@ -1,0 +1,20 @@
+# This file defines the various of query functions.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+def query_avgby_num(sql, num, filter) {
+	result = query(sql);
+
+	if is_num(num) && num != 0 {
+		for item in result {
+			for key, value in item {
+				if is_num(value){
+					item[key] = value / num;
+				}
+			}
+		}
+	}
+
+	return item_filter(result, filter);
+}

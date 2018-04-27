@@ -1,0 +1,50 @@
+# ########################################################################
+# This file defines the configuration of the rule.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# Base configuration of alerting detection.
+#
+# __range__:     Time interval to detect.
+# __type__:      Alerting type.
+# __subtype__:   Sub-type of alerting.
+# __condition__: Alert-checking condition.
+# ========================================================================
+__range__     = "5m";
+__type__      = "TCP";
+__subtype__   = "FLOWS_SIP_DIP_SYN";
+__condition__ = { "threshold": 200, "operator": ">=" };
+
+
+# ========================================================================
+# Configuration of History data.
+#
+# __hisdata_enable__: Enable history data checking.
+# __hisdata_topn__:   Check top-n records of alerting result.
+# __hisdata_range__:  Time interval to detect.
+# __hisdata_factor__: Comparision factor.
+# ========================================================================
+__hisdata_enable__ = true;
+__hisdata_topn__   = 10;
+__hisdata_range__  = "last_days(3, %(__range__))";
+__hisdata_factor__ = 1.5;
+
+
+# ========================================================================
+# Extend SQL filter.
+#
+# TCP status 1 means SYN timeout.
+# ========================================================================
+__sql_filter__ = [
+	"timeout_state_num = 1"
+];
+
+
+# ========================================================================
+# Import the language-specific description.
+# ========================================================================
+import "alert/tcp/flows/desc/%(__sys_lang__)/sip-dip-syn.rule";
+

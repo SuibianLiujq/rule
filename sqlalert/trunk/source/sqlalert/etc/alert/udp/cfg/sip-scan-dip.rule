@@ -1,0 +1,47 @@
+# This file defines the rule(cfg) to detec IP_SCAN event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range   - Time range to detect from the past to now.
+# k_count - Threshold of dip count.
+range   = "5m";
+k_count = 2;
+
+
+# Configration of output.
+#
+# output     - Output method of alert result.
+#              "es":    Insert result back to ES server.
+#              "email": Send result to email server.
+# subtype    - Sub-type of alert result.
+# sendto     - Type to select the email address.
+#              "all":   Owners and administrators.
+#              "owner": Owners only.
+#              "admin": Administrators only.
+# level      - Alert level.
+# level_list - Level list to map the level.
+output  = "email";
+subtype = "IP_SCAN";
+#sendto  = is_str(__sendto__) ? __sendto__ : "all";
+sendto  = "admin";
+level   = "EMERGENCY";
+level_list = [
+	{ "level": "WARNING",   "count_dip": 60   },
+	{ "level": "CRITICAL",  "count_dip": 180  },
+	{ "level": "EMERGENCY", "count_dip": 600  },
+	{ "level": "ERROR",     "count_dip": 3000 }
+];
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+title        = "L4 (UDP) IP 扫描";
+desc_type    = "L4 (UDP) IP 访问监控.";
+desc_subtype = "sip 向不同 dip 的同一端口发起 UDP 请求, 每分钟 dip 个数大于等于 " + k_count;
+

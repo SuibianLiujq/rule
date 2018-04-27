@@ -1,0 +1,79 @@
+# ########################################################################
+# This file defines the configuration of description of fields.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+
+
+# ========================================================================
+# SQLAlert will replace the field name with "desc" while sending emails
+# and do some formating depends on "fmt".
+# ========================================================================
+__fields_all__ = {
+	"@timestamp":      { "desc": "Timestamp"  },
+	"node":            { "desc": "iTAP Node"  },
+	"level":           { "desc": "Level"      },
+	"ip":              { "desc": "IP"         },
+	"sip":             { "desc": "Src IP"     },
+	"sport":           { "desc": "Src Port"   },
+	"dip":             { "desc": "Dst IP"     },
+	"dport":           { "desc": "Dst Port"   },
+	"status":          { "desc": "Status"     },
+	"index":           { "desc": "Index Name" },
+	"protocol":        { "desc": "Protocol"   },
+	"url":             { "desc": "URL"        },
+	"owner":           { "desc": "Owner"      },
+	"domain":          { "desc": "Domain"     },
+
+	"flow":            { "desc": "Flows",              "fmt": "int"   },
+	"flows":           { "desc": "Flows",              "fmt": "int"   },
+	"flows_refer":     { "desc": "Refer of Flows",     "fmt": "int"   },
+	"request":         { "desc": "Requests",           "fmt": "int"   },
+	"request_refer":   { "desc": "Refer of Requests",  "fmt": "int"   },
+	"requests":        { "desc": "Requests",           "fmt": "int"   },
+	"requests_refer":  { "desc": "Refer of Requests",  "fmt": "int"   },
+	"byte":            { "desc": "Bytes",              "fmt": "bytes" },
+	"bytes":           { "desc": "Bytes",              "fmt": "bytes" },
+	"inbytes":         { "desc": "In Bytes",           "fmt": "bytes" },
+	"outbytes":        { "desc": "Out Bytes",          "fmt": "bytes" },
+	"bit":             { "desc": "Bits",               "fmt": "bits"  },
+	"bits":            { "desc": "Bits",               "fmt": "bits"  },
+	"Bps":             { "desc": "Bps",                "fmt": "bytes" },
+	"bps":             { "desc": "bps",                "fmt": "bits"  },
+	"bps_refer":       { "desc": "Refer of bps",       "fmt": "bits"  },
+	"pps":             { "desc": "pps",                "fmt": "int"   },
+	"packets":         { "desc": "Packets",            "fmt": "int"   },
+	"packets_in":      { "desc": "In Packets",         "fmt": "int"   },
+	"packets_out":     { "desc": "Out Packets",        "fmt": "int"   },
+
+	"count":             { "desc": "Count",                     "fmt": "int" },
+	"count_ip":          { "desc": "Count(IP)",                 "fmt": "int" },
+	"count_sip":         { "desc": "Count(Src IP)",             "fmt": "int" },
+	"count_sport":       { "desc": "Count(Src Port)",           "fmt": "int" },
+	"count_dip":         { "desc": "Count(Dst IP)",             "fmt": "int" },
+	"count_dip_refer":   { "desc": "Refer of Count(Dst IP)",    "fmt": "int" },
+	"count_dport":       { "desc": "Count(Dst Port)",           "fmt": "int" },
+	"count_dport_refer": { "desc": "Refer of Count(Dst Port)",  "fmt": "int" },
+	"count_syn":         { "desc": "Count(SYN Timeout)",        "fmt": "int" },
+	"count_syn_ack":     { "desc": "Count(SYN+ACK Timeout)",    "fmt": "int" },
+
+	"latency":            { "desc": "Latency",                  "fmt": "time_us" },
+	"latency_refer":      { "desc": "Refer of Latency",         "fmt": "time_us" },
+	"latency_max":        { "desc": "Max Latency",              "fmt": "time_us" },
+	"latency_max_refer":  { "desc": "Refer of Max Latency",     "fmt": "time_us" },
+	"latency_min":        { "desc": "Min Latency",              "fmt": "time_us" },
+	"latency_min_refer":  { "desc": "Refer of Min Latency",     "fmt": "time_us" },
+	"latency_avg":        { "desc": "Avg Latency",              "fmt": "time_us" },
+	"latency_avg_refer":  { "desc": "Refer of Avg Latency",     "fmt": "time_us" },
+
+	"retransmit_rate":        { "desc": "Retransmit Rate",             "fmt": "percentage" },
+	"retransmit_rate_refer":  { "desc": "Refer of Retransmit Rate",    "fmt": "percentage" },
+	"ooo_rate":               { "desc": "Out Of Order Rate",           "fmt": "percentage" },
+	"ooo_rate_refer":         { "desc": "Refer of Out Of Order Rate",  "fmt": "percentage" },
+
+	"duration":          { "desc": "Duration",                  "fmt": "time_us"    },
+	"error_rate":        { "desc": "Error Rate",                "fmt": "percentage" },
+	"error_rate_refer":  { "desc": "Refer of Error Rate",       "fmt": "percentage" },
+
+	"refer_factor":    { "desc": "Refer Factor",         "fmt": "float" }
+};

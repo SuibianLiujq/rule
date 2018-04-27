@@ -1,0 +1,55 @@
+# This file defines MISC functions for all alert module.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# items_set() - Set key (= value) to all items in the list.
+#
+# @list:  A list of DICTs.
+# @key:   Key name must be string.
+# @value: Value to set.
+#
+# This function returns the @list itself for chain operation.
+def items_set(list, key, value) {
+	if is_list(list) && is_str(key) {
+		for item in list {
+			if is_dict(item) {
+				item[key] = value;
+			}
+		}
+	}
+
+	return list;
+}
+
+
+# copy_dict() - Copy items of the given dict.
+#
+# @dict: Dict to copy.
+# @keys: Key or a list of keys to copy.
+#
+# This function will copies all the items if keys not set.
+def copy_dict(dict, keys) {
+	resdict = { };
+
+	if is_dict(dict) {
+		if is_list(keys) {
+			for key in keys {
+				if key in dict {
+					resdict[key] = dict[key];
+				}
+			}
+		} else if is_str(keys) {
+			if keys in dict {
+				resdict[keys] = dict[keys];
+			}
+		} else {
+			for key, value in dict {
+				resdict[key] = value;
+			}
+		}
+	}
+
+	return resdict;
+}
+

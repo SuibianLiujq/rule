@@ -1,0 +1,34 @@
+# This file defines the rule(rule) to detect WAN traffic between sip and dip.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# SQL statements.
+#
+# Query all packets of all itap nodes.
+__sql__ = "
+	SELECT
+		sum(inbyte + outbyte)     AS Bps,
+		sum(inpacket + outpacket) AS pps
+	FROM  'tcp-*'
+	WHERE
+		last(%(range))
+		AND     ('192.168.0.0' < sip AND sip < '192.168.0.255')
+		AND NOT ('192.168.0.0' < dip AND dip < '192.168.0.255')
+	GROUP BY
+		date_histogram(1m) AS @timestamp,
+		node,
+		sip,
+		dip
+	LIMIT 100, 20, 20, 20
+	ORDER BY Bps DESC
+";
+
+
+# exec_rule() - Execute the rule and returns the result.
+#
+# @k_count: Threshold of count of dport.
+def exec_rule(k_Bps, k_pps) {
+	return query_avgby_num(__sql__, 60, "Bps >= k_Bps && pps >= k_pps");
+}
+

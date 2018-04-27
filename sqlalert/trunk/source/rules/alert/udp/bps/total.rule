@@ -1,0 +1,32 @@
+# ########################################################################
+# This file defines the rule to detect total bps.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+import "alert/template/agg-bps.rule";
+import "alert/udp/bps/cfg/total.rule";
+
+
+# ========================================================================
+# Base configuration.
+#
+# __index__:   Index name.
+# __metric__:  Metric name supported by rule template.
+# ========================================================================
+__index__   = "udp-*";
+__metric__  = "bps";
+
+
+# ========================================================================
+# Session name of email throttling.
+#
+# This configuration must be UNIQUE in the rule chains.
+# ========================================================================
+__throttle_session__ = "udp-bps-total";
+
+
+# ========================================================================
+# Run the rule from "main" function.
+# ========================================================================
+run("main");
+

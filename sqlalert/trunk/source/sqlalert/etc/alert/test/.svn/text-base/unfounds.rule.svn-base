@@ -1,0 +1,208 @@
+#
+unfound_list = [
+{
+"alias": "quickpay.sub.lakala.com",
+"domain": "quickpay.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "",
+"domain": "telpay.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "dsf.sub.lakala.com",
+"domain": "dsf.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "c.sub.lakala.com",
+"domain": "c.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "lottery.sub.lakala.com",
+"domain": "lottery.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "yxoa.sub.lakala.com",
+"domain": "yxoa.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "lsmsp.sub.lakala.com",
+"domain": "lsmsp.lakala.com",
+"name": "lakala.com"
+},
+{
+"name": "lakala.com",
+"alias": "recharge.sub.lakala.com",
+"domain": "recharge.lakala.com"
+},
+{
+"alias": "sftp.sub.mylakala.com",
+"domain": "sftp.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "ssl.sub.mylakala.com",
+"domain": "ssl.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "bmcp.sub.mylakala.com",
+"domain": "bmcp.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "hbyx.sub.mylakala.com",
+"domain": "hbyx.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "cooperation.sub.mylakala.com",
+"domain": "cooperation.lakala.com",
+"name": "lakala.com"
+},
+{
+"domain": "sips.lakala.com",
+"name": "lakala.com",
+"alias": "sips.sub.mylakala.com"
+},
+{
+"name": "lakala.com",
+"alias": "accnc.sub.mylakala.com",
+"domain": "accnc.lakala.com"
+},
+{
+"alias": "acctc.sub.mylakala.com",
+"domain": "acctc.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "ac.sub.mylakala.com",
+"domain": "ac.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "accmcc.sub.mylakala.com",
+"domain": "accmcc.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "ssl.sub.mylakala.com",
+"domain": "ssl.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "bmcp.sub.mylakala.com",
+"domain": "bmcp.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "hbyx.sub.mylakala.com",
+"domain": "hbyx.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "cooperation.sub.mylakala.com",
+"domain": "cooperation.lakala.com",
+"name": "lakala.com"
+},
+{
+"alias": "r.sub.lakala.com.cn",
+"domain": "r.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "sdqs.sub.lakala.com.cn",
+"domain": "sdqs.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "xd.sub.lakala.com.cn",
+"domain": "xd.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"domain": "ftp.lakala.com.cn",
+"name": "lakala.com.cn",
+"alias": "ftp.sub.lakala.com.cn"
+},
+{
+"alias": "man.sub1.lakala.com.cn",
+"domain": "man.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"name": "lakala.com.cn",
+"alias": "ssl.sub1.lakala.com.cn",
+"domain": "ssl.lakala.com.cn"
+},
+{
+"alias": "duizhang.sub1.lakala.com.cn",
+"domain": "duizhang.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "bmcpftp.sub1.lakala.com.cn",
+"domain": "bmcpftp.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "fx.sub1.lakala.com.cn",
+"domain": "fx.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "tzssl.sub1.lakala.com.cn",
+"domain": "tzssl.sslworking.com",
+"name": "lakala.com.cn"
+},
+{
+"alias": "tzradius.sub1.lakala.com.cn",
+"domain": "tzradius.sslworking.com",
+"name": "lakala.com.cn"
+},
+{
+"domain": "c.lakala.com.cn",
+"name": "lakala.com.cn",
+"alias": "c.lakala.com"
+},
+{
+"name": "lakala.com.cn",
+"alias": "mail1.sub.lakala.com.cn",
+"domain": "mail1.lakala.com.cn"
+},
+{
+"alias": "mail2.sub.lakala.com.cn",
+"domain": "mail2.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "mail3.sub.lakala.com.cn",
+"domain": "mail3.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "tusou.sub.lakala.com.cn",
+"domain": "tusou.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "yqt.sub.lakala.com.cn",
+"domain": "yqt.lakala.com.cn",
+"name": "lakala.com.cn"
+},
+{
+"alias": "pcsr.sub.kaolazhengxin.com",
+"domain": "pcsr.kaolazhengxin.com",
+"name": "kaolazhengxin"
+},
+{
+"alias": "zbl.sub.kaolazhengxin.com",
+"domain": "zbl.kaolazhengxin.com",
+"name": "kaolazhengxin"
+}
+];

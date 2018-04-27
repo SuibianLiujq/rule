@@ -1,0 +1,118 @@
+# This file defines the rule to find the iTAP owner and desc.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+include "cfg/emails.rule";
+include "cfg/data/itaps.rule";
+
+
+# Check if item eques(in) list.
+#
+# @item: Item to check.
+# @list: Another item or list of items.
+def itaps_in(item, list) {
+	return is_list(list) ? (item in list) : (item == list);
+}
+
+
+# itaps_get() - Returns the combined owner(desc) of given name.
+#
+# @name: Name of iTAP node.
+def itaps_get(name) {
+	return itaps_get_owner(name) + " (" + itaps_get_desc(name) + ")";
+}
+
+
+# itaps_get_owner() - Returns the owner of given name.
+#
+# @name: Name of iTAP node.
+def itaps_get_owner(name) {
+	for item in __itaps_owners__ {
+		if ("name" in item) && itaps_in(name, item["name"]) {
+			return item["owner"];
+		}
+	}
+	return __itaps_def_owner__;
+}
+
+
+# itaps_get_desc() - Returns the desc of given name.
+#
+# @name: Name of iTAP node.
+def itaps_get_desc(name) {
+	for item in __itaps_descs__ {
+		if ("name" in item) && itaps_in(name, item["name"]) {
+			return item["desc"];
+		}
+	}
+	return __itaps_def_owner__;
+}
+
+
+# itaps_get_emails() - Returns the emails list of owners.
+#
+# @list: List of iTAP name or a list of DICTs.
+# @key:  The key of the iTAP name.
+def itaps_get_emails(list, key) {
+	owners = [ ];
+
+	if is_list(list) {
+		for item in list {
+			if is_str(item) {
+				owners = append(owners, itaps_get_owner(item));
+			} else if is_dict(item) && (key in item) {
+				owners = append(owners, itaps_get_owner(item[key]));
+			}
+		}
+	}
+
+	return emails_get_list(owners);
+}
+
+
+# itaps_map() - Add combined owner(desc) to the list of items.
+#
+# @list: A list of dict.
+# @key:  Key of iTAP node name.
+# @name: New key to add to the item in the list.
+def itaps_map(list, key, name) {
+	if !is_str(name) { name = "owner"; }
+
+	for item in list {
+		if is_dict(item) && key in item {
+			item[name] = itaps_get(item[key]);
+		}
+	}
+}
+
+
+# itaps_map_owner() - Add owner to the list of items.
+#
+# @list: A list of dict.
+# @key:  Key of iTAP node name.
+# @name: New key to add to the item in the list.
+def itaps_map_owner(list, key, name) {
+	if !is_str(name) { name = "owner"; }
+
+	for item in list {
+		if is_dict(item) && key in item {
+			item[name] = itaps_get_owner(item[key]);
+		}
+	}
+}
+
+
+# itaps_map_desc() - Add desc to the list of items.
+#
+# @list: A list of dict.
+# @key:  Key of iTAP node name.
+# @name: New key to add to the item in the list.
+def itaps_map_desc(list, key, name) {
+	if !is_str(name) { name = "desc"; }
+
+	for item in list {
+		if is_dict(item) && key in item {
+			item[name] = itaps_get_desc(item[key]);
+		}
+	}
+}
+

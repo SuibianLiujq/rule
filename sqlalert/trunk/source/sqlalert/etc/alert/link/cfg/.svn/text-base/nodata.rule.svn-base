@@ -1,0 +1,42 @@
+# This file defines the rule(cfg) to detec NODATA event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range      - Time range to detect from the past to now.
+# node_list  - List of itap node name to detect.
+# index_list - List of index name to detect for each itap.
+range     = "5m";
+k_packets = 0;
+
+
+# Configration of output.
+#
+# output    - Output method of alert result.
+#             "es":    Insert result back to ES server.
+#             "email": Send result to email server.
+# subtype   - Sub-type of alert result.
+# sendto    - Type to select the email address.
+#             "all":   Owners and administrators.
+#             "owner": Owners only.
+#             "admin": Administrators only.
+# level     - Alert level.
+output  = "email";
+subtype = "NODATA";
+sendto  = is_str(__sendto__) ? __sendto__ : "all";
+level   = "EMERGENCY";
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+# desc_down    - Description of 'machine is down'.
+# desc_delay   - Description of 'data is delay'.
+title        = "L2 (Link) 超过 " + range + " 数据包小于等于 " + k_packets;
+desc_type    = "L2 (Link) 数据监控.";
+desc_subtype = "iTAP 节点(或数据镜像)故障.";
+

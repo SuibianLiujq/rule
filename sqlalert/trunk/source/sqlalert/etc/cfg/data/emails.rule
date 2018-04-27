@@ -1,0 +1,29 @@
+# This file defines the email address list of all owners.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Filed name of Email descriptions.
+__emails_desc_type__   = "报警类型";
+__emails_desc_level__  = "报警等级";
+__emails_desc_desc__   = "报警描述";
+__emails_desc_time__   = "报警时间";
+__emails_desc_detail__ = "报警详细信息";
+
+
+# Adminitorator and Other email addresses.
+#__emails_admin__ = [ "张立丹", "张腾飞" ];
+__emails_admin__ = [ "张立丹" ];
+__emails__         = {
+	"吴超":         "yuki.wu@clearclouds-global.com",
+	"薛奎民":    "kuimin.xue@clearclouds-global.com",
+	"唐老师":    "xinan.tang@clearclouds-global.com",
+	"张立丹":   "lidan.zhang@clearclouds-global.com",
+	"张腾飞": "tengfei.zhang@clearclouds-global.com",
+	"杨润达":    "runda.yang@clearclouds-global.com",
+	"涂海波":      "haibo.tu@clearclouds-global.com",
+	"周天东": "tiandong.zhou@clearclouds-global.com",
+	"王宗浩":  "zonghao.wang@clearclouds-global.com",
+	"王雨婷":   "yuting.wang@clearclouds-global.com"
+};
+

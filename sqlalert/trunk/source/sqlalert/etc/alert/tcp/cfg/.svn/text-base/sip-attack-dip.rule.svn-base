@@ -1,0 +1,46 @@
+# This file defines the rule(cfg) to detec SYN_ATTACK event.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configration of rule.
+#
+# range - Time range to detect from the past to now.
+# k_fps - Threshold of fps (Flows per second).
+range = "5m";
+k_fps = 1;
+
+
+# Configration of output.
+#
+# output     - Output method of alert result.
+#              "es":    Insert result back to ES server.
+#              "email": Send result to email server.
+# subtype    - Sub-type of alert result.
+# sendto     - Type to select the email address.
+#              "all":   Owners and administrators.
+#              "owner": Owners only.
+#              "admin": Administrators only.
+# level      - Alert level.
+# level_list - Level list to map the level.
+output  = "email";
+subtype = "SYN_ATTACK";
+sendto  = is_str(__sendto__) ? __sendto__ : "all";
+level   = "EMERGENCY";
+level_list = [
+	{ "level": "WARNING",   "fps": 1 },
+	{ "level": "CRITICAL",  "fps": 10 },
+	{ "level": "EMERGENCY", "fps": 30 },
+	{ "level": "ERROR",     "fps": 100 }
+];
+
+
+# Description string.
+#
+# title        - Email title.
+# desc_type    - Description of alert type.
+# desc_subtype - Description of alert subtype.
+title        = "L4 (TCP) SYN 攻击";
+desc_type    = "L4 (TCP) 连接数监控.";
+desc_subtype = "sip 向 dip 的某个端口发起连接, 每秒钟连接数大于等于 " + k_fps;
+

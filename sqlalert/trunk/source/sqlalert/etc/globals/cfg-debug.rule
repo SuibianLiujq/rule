@@ -1,0 +1,19 @@
+# This file defines the debugging swither of ES and SQL module.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configuration of DSL compiler.
+#
+# __es_debug_request__  - Output the DSL request of all query.
+# __es_debug_response__ - Output the ES response of all query.
+__es_debug_request__  = false;
+__es_debug_response__ = false;
+
+
+# Configuration of SQL client.
+#
+# __sql_debug_request__  - Output SQL statements of all query.
+# __sql_debug_response__ - Output SQL response of all query.
+__sql_debug_request__  = false;
+__sql_debug_response__ = false;

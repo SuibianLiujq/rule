@@ -1,0 +1,45 @@
+# This file defines the configuration of ES server, ES client and
+# DSL compiler.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+
+
+# Configuration of ES hosts.
+#
+# __es_host__        - ES host address or domain.
+# __es_host_query__  - ES host address or domain for query.
+# __es_host_insert__ - ES host address or domain for insert.
+#
+# The query function use __es_host_query__ as ES host to send DSL query or
+# use __es_host__ as ES host if __es_host_query__ not defined.
+__es_host__        = "192.168.0.101:9299";
+__es_host_query__  = __es_host__;
+__es_host_insert__ = __es_host__;
+
+
+# Configuration of ES compiler.
+#
+# __es_bucket_size__ - Default bucket size of ES buckets.
+# __es_script__      - Default script used by DSL.
+# __es_order__       - Default sort order of all buckets.
+__es_bucket_size__ = 50;
+__es_script__      = "painless";
+__es_order__       = "desc";
+
+
+# Configuration of ES client.
+#
+# __es_timeout__ - Timeout seconds while POST http request.
+__es_timeout__ = 30;
+
+
+# Configuration of ES indexing.
+#
+# __es_index_alert__ - Index info of 'alert-*' index.
+#                      %Y: will be replaced by current year.
+#                      %M: will be replaced by current month.
+#                      %D: will be replaced by current day of month.
+#
+# See ES official documents for more about ES index.
+__es_index_alert__ = { "index": "alert-%Y-%M-%D", "type": "netflow_v9" };
+

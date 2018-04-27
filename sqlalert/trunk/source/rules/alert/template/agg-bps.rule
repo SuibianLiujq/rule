@@ -1,0 +1,43 @@
+# ########################################################################
+# This file define the rule template of bps.
+#
+# Author: ZHANG Li Dan <lidan.zhang@clearclouds-global.com>
+# ########################################################################
+include "alert/template/base/threshold-hisdata.rule";
+
+
+# ========================================================================
+# Supported metric.
+# ========================================================================
+__dict_metric__ = {
+	"bps":       { "metric": [ "SUM((inbyte + outbyte) * 8) AS bps" ], "alias": "bps" },
+	"bps_in":    { "metric": [ "SUM(inbyte  * 8)            AS bps" ], "alias": "bps" },
+	"bps_out":   { "metric": [ "SUM(outbyte * 8)            AS bps" ], "alias": "bps" },
+	"pps":       { "metric": [ "SUM(inpacket + outpacket)   AS pps" ], "alias": "pps" },
+	"pps_total": { "metric": [ "SUM(total_packet)           AS pps" ], "alias": "pps" }
+};
+
+
+# ========================================================================
+# main() - Entry of the rule.
+# ========================================================================
+def main() {
+	metric = __dict_metric__[__metric__];
+	if !metric {
+		error("__metric__ (%(__metric__)) not found");
+	}
+
+	# Setup global variable used by template.
+	__query_index__   = __index__;
+	__query_metrics__ = metric["metric"];
+	__metric_name__   = metric["alias"];
+	__query_stat__    = "1m";
+	__query_func__    = "query_avgby_num";
+	__query_arg__     = 60;
+	__agg_items__     = "max";
+
+	# Call the function list.
+	check_cfg();
+	return call_list(__func_list());
+}
+
