@@ -1,0 +1,721 @@
+sqlalert/
+├── tags
+│   ├── 1.0.0
+│   │   ├── Makefile
+│   │   ├── release-build.sh
+│   │   └── release-checkout.sh
+│   ├── 1.0.2
+│   │   ├── Makefile
+│   │   ├── release-build.sh
+│   │   └── release-checkout.sh
+│   └── 1.0.3
+│       ├── Makefile
+│       ├── release-build.sh
+│       └── release-checkout.sh
+└── trunk
+    ├── Makefile
+    ├── release-build.sh
+    ├── release-checkout.sh
+    └── source
+        ├── rules
+        │   ├── alert
+        │   │   ├── dns
+        │   │   │   ├── flows
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   ├── domain.rule
+        │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   ├── sip-domain.rule
+        │   │   │   │   │   ├── sip.rule
+        │   │   │   │   │   └── total.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   │   ├── domain.rule
+        │   │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   │   ├── sip-domain.rule
+        │   │   │   │   │   │   ├── sip.rule
+        │   │   │   │   │   │   └── total.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip.rule
+        │   │   │   │   │       ├── domain.rule
+        │   │   │   │   │       ├── sip-dip.rule
+        │   │   │   │   │       ├── sip-domain.rule
+        │   │   │   │   │       ├── sip.rule
+        │   │   │   │   │       └── total.rule
+        │   │   │   │   ├── dip.rule
+        │   │   │   │   ├── domain.rule
+        │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   ├── sip-domain.rule
+        │   │   │   │   ├── sip.rule
+        │   │   │   │   └── total.rule
+        │   │   │   └── retcode
+        │   │   │       ├── cfg
+        │   │   │       │   ├── dip.rule
+        │   │   │       │   ├── domain.rule
+        │   │   │       │   ├── sip-dip.rule
+        │   │   │       │   ├── sip-domain.rule
+        │   │   │       │   └── sip.rule
+        │   │   │       ├── desc
+        │   │   │       │   ├── cn
+        │   │   │       │   │   ├── dip.rule
+        │   │   │       │   │   ├── domain.rule
+        │   │   │       │   │   ├── sip-dip.rule
+        │   │   │       │   │   ├── sip-domain.rule
+        │   │   │       │   │   └── sip.rule
+        │   │   │       │   └── en
+        │   │   │       │       ├── dip.rule
+        │   │   │       │       ├── domain.rule
+        │   │   │       │       ├── sip-dip.rule
+        │   │   │       │       ├── sip-domain.rule
+        │   │   │       │       └── sip.rule
+        │   │   │       ├── dip.rule
+        │   │   │       ├── domain.rule
+        │   │   │       ├── sip-dip.rule
+        │   │   │       ├── sip-domain.rule
+        │   │   │       └── sip.rule
+        │   │   ├── http
+        │   │   │   ├── flows
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   ├── sip.rule
+        │   │   │   │   │   ├── sip-url.rule
+        │   │   │   │   │   └── url.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   │   ├── sip.rule
+        │   │   │   │   │   │   ├── sip-url.rule
+        │   │   │   │   │   │   └── url.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip.rule
+        │   │   │   │   │       ├── sip-dip.rule
+        │   │   │   │   │       ├── sip.rule
+        │   │   │   │   │       ├── sip-url.rule
+        │   │   │   │   │       └── url.rule
+        │   │   │   │   ├── dip.rule
+        │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   ├── sip.rule
+        │   │   │   │   ├── sip-url.rule
+        │   │   │   │   └── url.rule
+        │   │   │   ├── latency
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   ├── sip.rule
+        │   │   │   │   │   ├── sip-url.rule
+        │   │   │   │   │   └── url.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   │   ├── sip.rule
+        │   │   │   │   │   │   ├── sip-url.rule
+        │   │   │   │   │   │   └── url.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip.rule
+        │   │   │   │   │       ├── sip-dip.rule
+        │   │   │   │   │       ├── sip.rule
+        │   │   │   │   │       ├── sip-url.rule
+        │   │   │   │   │       └── url.rule
+        │   │   │   │   ├── dip.rule
+        │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   ├── sip.rule
+        │   │   │   │   ├── sip-url.rule
+        │   │   │   │   └── url.rule
+        │   │   │   └── status
+        │   │   │       ├── cfg
+        │   │   │       │   ├── dip.rule
+        │   │   │       │   ├── sip-dip.rule
+        │   │   │       │   ├── sip.rule
+        │   │   │       │   ├── sip-url.rule
+        │   │   │       │   └── url.rule
+        │   │   │       ├── desc
+        │   │   │       │   ├── cn
+        │   │   │       │   │   ├── dip.rule
+        │   │   │       │   │   ├── sip-dip.rule
+        │   │   │       │   │   ├── sip.rule
+        │   │   │       │   │   ├── sip-url.rule
+        │   │   │       │   │   └── url.rule
+        │   │   │       │   └── en
+        │   │   │       │       ├── dip.rule
+        │   │   │       │       ├── sip-dip.rule
+        │   │   │       │       ├── sip.rule
+        │   │   │       │       ├── sip-url.rule
+        │   │   │       │       └── url.rule
+        │   │   │       ├── dip.rule
+        │   │   │       ├── sip-dip.rule
+        │   │   │       ├── sip.rule
+        │   │   │       ├── sip-url.rule
+        │   │   │       └── url.rule
+        │   │   ├── itap
+        │   │   │   ├── cfg
+        │   │   │   │   ├── nodata-index.rule
+        │   │   │   │   └── nodata-link.rule
+        │   │   │   ├── desc
+        │   │   │   │   ├── cn
+        │   │   │   │   │   ├── nodata-index.rule
+        │   │   │   │   │   └── nodata-link.rule
+        │   │   │   │   └── en
+        │   │   │   │       ├── nodata-index.rule
+        │   │   │   │       └── nodata-link.rule
+        │   │   │   ├── nodata-index.rule
+        │   │   │   └── nodata-link.rule
+        │   │   ├── tcp
+        │   │   │   ├── bps
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip-dport-in.rule
+        │   │   │   │   │   ├── dip-dport-out.rule
+        │   │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   │   ├── dip-in.rule
+        │   │   │   │   │   ├── dip-out.rule
+        │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   ├── sip-dip-dport-in.rule
+        │   │   │   │   │   ├── sip-dip-dport-out.rule
+        │   │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   │   ├── sip-dip-in.rule
+        │   │   │   │   │   ├── sip-dip-out.rule
+        │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   ├── sip-dport-in.rule
+        │   │   │   │   │   ├── sip-dport-out.rule
+        │   │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   │   ├── sip-in.rule
+        │   │   │   │   │   ├── sip-out.rule
+        │   │   │   │   │   └── sip.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip-dport-in.rule
+        │   │   │   │   │   │   ├── dip-dport-out.rule
+        │   │   │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   │   │   ├── dip-in.rule
+        │   │   │   │   │   │   ├── dip-out.rule
+        │   │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   │   ├── sip-dip-dport-in.rule
+        │   │   │   │   │   │   ├── sip-dip-dport-out.rule
+        │   │   │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   │   │   ├── sip-dip-in.rule
+        │   │   │   │   │   │   ├── sip-dip-out.rule
+        │   │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   │   ├── sip-dport-in.rule
+        │   │   │   │   │   │   ├── sip-dport-out.rule
+        │   │   │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   │   │   ├── sip-in.rule
+        │   │   │   │   │   │   ├── sip-out.rule
+        │   │   │   │   │   │   └── sip.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip-dport-in.rule
+        │   │   │   │   │       ├── dip-dport-out.rule
+        │   │   │   │   │       ├── dip-dport.rule
+        │   │   │   │   │       ├── dip-in.rule
+        │   │   │   │   │       ├── dip-out.rule
+        │   │   │   │   │       ├── dip.rule
+        │   │   │   │   │       ├── sip-dip-dport-in.rule
+        │   │   │   │   │       ├── sip-dip-dport-out.rule
+        │   │   │   │   │       ├── sip-dip-dport.rule
+        │   │   │   │   │       ├── sip-dip-in.rule
+        │   │   │   │   │       ├── sip-dip-out.rule
+        │   │   │   │   │       ├── sip-dip.rule
+        │   │   │   │   │       ├── sip-dport-in.rule
+        │   │   │   │   │       ├── sip-dport-out.rule
+        │   │   │   │   │       ├── sip-dport.rule
+        │   │   │   │   │       ├── sip-in.rule
+        │   │   │   │   │       ├── sip-out.rule
+        │   │   │   │   │       └── sip.rule
+        │   │   │   │   ├── dip-dport-in.rule
+        │   │   │   │   ├── dip-dport-out.rule
+        │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   ├── dip-in.rule
+        │   │   │   │   ├── dip-out.rule
+        │   │   │   │   ├── dip.rule
+        │   │   │   │   ├── sip-dip-dport-in.rule
+        │   │   │   │   ├── sip-dip-dport-out.rule
+        │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   ├── sip-dip-in.rule
+        │   │   │   │   ├── sip-dip-out.rule
+        │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   ├── sip-dport-in.rule
+        │   │   │   │   ├── sip-dport-out.rule
+        │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   ├── sip-in.rule
+        │   │   │   │   ├── sip-out.rule
+        │   │   │   │   └── sip.rule
+        │   │   │   ├── flows
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip-dport-normal.rule
+        │   │   │   │   │   ├── dip-dport-rst.rule
+        │   │   │   │   │   ├── dip-dport-synack.rule
+        │   │   │   │   │   ├── dip-dport-syn.rule
+        │   │   │   │   │   ├── dip-normal.rule
+        │   │   │   │   │   ├── dip-rst.rule
+        │   │   │   │   │   ├── dip-synack.rule
+        │   │   │   │   │   ├── dip-syn.rule
+        │   │   │   │   │   ├── sip-dip-dport-normal.rule
+        │   │   │   │   │   ├── sip-dip-dport-rst.rule
+        │   │   │   │   │   ├── sip-dip-dport-synack.rule
+        │   │   │   │   │   ├── sip-dip-dport-syn.rule
+        │   │   │   │   │   ├── sip-dip-normal.rule
+        │   │   │   │   │   ├── sip-dip-rst.rule
+        │   │   │   │   │   ├── sip-dip-synack.rule
+        │   │   │   │   │   ├── sip-dip-syn.rule
+        │   │   │   │   │   ├── sip-dport-normal.rule
+        │   │   │   │   │   ├── sip-dport-rst.rule
+        │   │   │   │   │   ├── sip-dport-synack.rule
+        │   │   │   │   │   ├── sip-dport-syn.rule
+        │   │   │   │   │   ├── sip-normal.rule
+        │   │   │   │   │   ├── sip-rst.rule
+        │   │   │   │   │   ├── sip-scan-dip.rule
+        │   │   │   │   │   ├── sip-scan-dport.rule
+        │   │   │   │   │   ├── sip-synack.rule
+        │   │   │   │   │   └── sip-syn.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip-dport-normal.rule
+        │   │   │   │   │   │   ├── dip-dport-rst.rule
+        │   │   │   │   │   │   ├── dip-dport-synack.rule
+        │   │   │   │   │   │   ├── dip-dport-syn.rule
+        │   │   │   │   │   │   ├── dip-normal.rule
+        │   │   │   │   │   │   ├── dip-rst.rule
+        │   │   │   │   │   │   ├── dip-synack.rule
+        │   │   │   │   │   │   ├── dip-syn.rule
+        │   │   │   │   │   │   ├── sip-dip-dport-normal.rule
+        │   │   │   │   │   │   ├── sip-dip-dport-rst.rule
+        │   │   │   │   │   │   ├── sip-dip-dport-synack.rule
+        │   │   │   │   │   │   ├── sip-dip-dport-syn.rule
+        │   │   │   │   │   │   ├── sip-dip-normal.rule
+        │   │   │   │   │   │   ├── sip-dip-rst.rule
+        │   │   │   │   │   │   ├── sip-dip-synack.rule
+        │   │   │   │   │   │   ├── sip-dip-syn.rule
+        │   │   │   │   │   │   ├── sip-dport-normal.rule
+        │   │   │   │   │   │   ├── sip-dport-rst.rule
+        │   │   │   │   │   │   ├── sip-dport-synack.rule
+        │   │   │   │   │   │   ├── sip-dport-syn.rule
+        │   │   │   │   │   │   ├── sip-normal.rule
+        │   │   │   │   │   │   ├── sip-rst.rule
+        │   │   │   │   │   │   ├── sip-scan-dip.rule
+        │   │   │   │   │   │   ├── sip-scan-dport.rule
+        │   │   │   │   │   │   ├── sip-synack.rule
+        │   │   │   │   │   │   └── sip-syn.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip-dport-normal.rule
+        │   │   │   │   │       ├── dip-dport-rst.rule
+        │   │   │   │   │       ├── dip-dport-synack.rule
+        │   │   │   │   │       ├── dip-dport-syn.rule
+        │   │   │   │   │       ├── dip-normal.rule
+        │   │   │   │   │       ├── dip-rst.rule
+        │   │   │   │   │       ├── dip-synack.rule
+        │   │   │   │   │       ├── dip-syn.rule
+        │   │   │   │   │       ├── sip-dip-dport-normal.rule
+        │   │   │   │   │       ├── sip-dip-dport-rst.rule
+        │   │   │   │   │       ├── sip-dip-dport-synack.rule
+        │   │   │   │   │       ├── sip-dip-dport-syn.rule
+        │   │   │   │   │       ├── sip-dip-normal.rule
+        │   │   │   │   │       ├── sip-dip-rst.rule
+        │   │   │   │   │       ├── sip-dip-synack.rule
+        │   │   │   │   │       ├── sip-dip-syn.rule
+        │   │   │   │   │       ├── sip-dport-normal.rule
+        │   │   │   │   │       ├── sip-dport-rst.rule
+        │   │   │   │   │       ├── sip-dport-synack.rule
+        │   │   │   │   │       ├── sip-dport-syn.rule
+        │   │   │   │   │       ├── sip-normal.rule
+        │   │   │   │   │       ├── sip-rst.rule
+        │   │   │   │   │       ├── sip-scan-dip.rule
+        │   │   │   │   │       ├── sip-scan-dport.rule
+        │   │   │   │   │       ├── sip-synack.rule
+        │   │   │   │   │       └── sip-syn.rule
+        │   │   │   │   ├── dip-dport-normal.rule
+        │   │   │   │   ├── dip-dport-rst.rule
+        │   │   │   │   ├── dip-dport-synack.rule
+        │   │   │   │   ├── dip-dport-syn.rule
+        │   │   │   │   ├── dip-normal.rule
+        │   │   │   │   ├── dip-rst.rule
+        │   │   │   │   ├── dip-synack.rule
+        │   │   │   │   ├── dip-syn.rule
+        │   │   │   │   ├── sip-dip-dport-normal.rule
+        │   │   │   │   ├── sip-dip-dport-rst.rule
+        │   │   │   │   ├── sip-dip-dport-synack.rule
+        │   │   │   │   ├── sip-dip-dport-syn.rule
+        │   │   │   │   ├── sip-dip-normal.rule
+        │   │   │   │   ├── sip-dip-rst.rule
+        │   │   │   │   ├── sip-dip-synack.rule
+        │   │   │   │   ├── sip-dip-syn.rule
+        │   │   │   │   ├── sip-dport-normal.rule
+        │   │   │   │   ├── sip-dport-rst.rule
+        │   │   │   │   ├── sip-dport-synack.rule
+        │   │   │   │   ├── sip-dport-syn.rule
+        │   │   │   │   ├── sip-normal.rule
+        │   │   │   │   ├── sip-rst.rule
+        │   │   │   │   ├── sip-scan-dip.rule
+        │   │   │   │   ├── sip-scan-dport.rule
+        │   │   │   │   ├── sip-synack.rule
+        │   │   │   │   └── sip-syn.rule
+        │   │   │   ├── latency
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   │   └── sip.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   │   │   └── sip.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip-dport.rule
+        │   │   │   │   │       ├── dip.rule
+        │   │   │   │   │       ├── sip-dip-dport.rule
+        │   │   │   │   │       ├── sip-dip.rule
+        │   │   │   │   │       ├── sip-dport.rule
+        │   │   │   │   │       └── sip.rule
+        │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   ├── dip.rule
+        │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   └── sip.rule
+        │   │   │   ├── out-of-order
+        │   │   │   │   ├── cfg
+        │   │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   │   └── sip.rule
+        │   │   │   │   ├── desc
+        │   │   │   │   │   ├── cn
+        │   │   │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   │   │   ├── dip.rule
+        │   │   │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   │   │   └── sip.rule
+        │   │   │   │   │   └── en
+        │   │   │   │   │       ├── dip-dport.rule
+        │   │   │   │   │       ├── dip.rule
+        │   │   │   │   │       ├── sip-dip-dport.rule
+        │   │   │   │   │       ├── sip-dip.rule
+        │   │   │   │   │       ├── sip-dport.rule
+        │   │   │   │   │       └── sip.rule
+        │   │   │   │   ├── dip-dport.rule
+        │   │   │   │   ├── dip.rule
+        │   │   │   │   ├── sip-dip-dport.rule
+        │   │   │   │   ├── sip-dip.rule
+        │   │   │   │   ├── sip-dport.rule
+        │   │   │   │   └── sip.rule
+        │   │   │   └── retransmit
+        │   │   │       ├── cfg
+        │   │   │       │   ├── dip-dport.rule
+        │   │   │       │   ├── dip.rule
+        │   │   │       │   ├── sip-dip-dport.rule
+        │   │   │       │   ├── sip-dip.rule
+        │   │   │       │   ├── sip-dport.rule
+        │   │   │       │   └── sip.rule
+        │   │   │       ├── desc
+        │   │   │       │   ├── cn
+        │   │   │       │   │   ├── dip-dport.rule
+        │   │   │       │   │   ├── dip.rule
+        │   │   │       │   │   ├── sip-dip-dport.rule
+        │   │   │       │   │   ├── sip-dip.rule
+        │   │   │       │   │   ├── sip-dport.rule
+        │   │   │       │   │   └── sip.rule
+        │   │   │       │   └── en
+        │   │   │       │       ├── dip-dport.rule
+        │   │   │       │       ├── dip.rule
+        │   │   │       │       ├── sip-dip-dport.rule
+        │   │   │       │       ├── sip-dip.rule
+        │   │   │       │       ├── sip-dport.rule
+        │   │   │       │       └── sip.rule
+        │   │   │       ├── dip-dport.rule
+        │   │   │       ├── dip.rule
+        │   │   │       ├── sip-dip-dport.rule
+        │   │   │       ├── sip-dip.rule
+        │   │   │       ├── sip-dport.rule
+        │   │   │       └── sip.rule
+        │   │   ├── template
+        │   │   │   ├── agg-base.rule
+        │   │   │   ├── agg-bps.rule
+        │   │   │   ├── agg-latency.rule
+        │   │   │   ├── agg-rate.rule
+        │   │   │   ├── agg-reflect.rule
+        │   │   │   ├── base
+        │   │   │   │   └── threshold-hisdata.rule
+        │   │   │   └── nodata.rule
+        │   │   └── udp
+        │   │       └── bps
+        │   │           ├── cfg
+        │   │           │   └── total.rule
+        │   │           ├── desc
+        │   │           │   ├── cn
+        │   │           │   │   └── total.rule
+        │   │           │   └── en
+        │   │           │       └── total.rule
+        │   │           └── total.rule
+        │   ├── globals
+        │   │   ├── data.rule
+        │   │   ├── sys.rule
+        │   │   └── yll
+        │   │       ├── data.rule
+        │   │       └── sys.rule
+        │   ├── globals-lang
+        │   │   ├── cn
+        │   │   │   ├── fields.rule
+        │   │   │   └── sys.rule
+        │   │   └── en
+        │   │       ├── fields.rule
+        │   │       └── sys.rule
+        │   ├── release-build.sh
+        │   ├── tasks
+        │   │   ├── alert-all.json
+        │   │   ├── alert-client.json
+        │   │   └── alert-server.json
+        │   └── test
+        │       └── test.rule
+        └── sqlalert
+            ├── bin
+            ├── build.sh
+            ├── docs
+            │   ├── build.sh
+            │   ├── Makefile
+            │   ├── out
+            │   ├── output
+            │   │   └── sqlalert-rdl-cn-1.1.0.pdf
+            │   ├── sqlalert-rdl-cn-1.1.0.pdf
+            │   ├── src
+            │   │   ├── rdl
+            │   │   │   ├── cn
+            │   │   │   │   ├── 0000-home.md
+            │   │   │   │   ├── 1000-overview.md
+            │   │   │   │   ├── 2000-syntax.md
+            │   │   │   │   ├── 3000-libs.md
+            │   │   │   │   ├── 3010-base.md
+            │   │   │   │   ├── 3020-types.md
+            │   │   │   │   ├── 3030-strings.md
+            │   │   │   │   ├── 3040-list.md
+            │   │   │   │   ├── 3050-dict.md
+            │   │   │   │   ├── 3060-time.md
+            │   │   │   │   ├── 3070-exec.md
+            │   │   │   │   ├── 3080-query.md
+            │   │   │   │   ├── 3090-alert.md
+            │   │   │   │   └── all-funcs
+            │   │   │   └── en
+            │   │   └── sql
+            │   │       ├── cn
+            │   │       └── en
+            │   └── template-pdf.latex
+            ├── etc
+            │   ├── alert
+            │   │   ├── dns
+            │   │   │   ├── cfg
+            │   │   │   │   └── servers-whitelist.rule
+            │   │   │   ├── rule
+            │   │   │   │   └── servers-whitelist.rule
+            │   │   │   └── servers-whitelist.rule
+            │   │   ├── http
+            │   │   ├── ip
+            │   │   │   ├── cfg
+            │   │   │   │   └── newproto.rule
+            │   │   │   ├── newproto.rule
+            │   │   │   └── rule
+            │   │   │       └── newproto.rule
+            │   │   ├── itap
+            │   │   │   ├── cfg
+            │   │   │   │   └── nodata.rule
+            │   │   │   ├── nodata.rule
+            │   │   │   └── rule
+            │   │   │       └── nodata.rule
+            │   │   ├── link
+            │   │   │   ├── cfg
+            │   │   │   │   ├── gtmtu.rule
+            │   │   │   │   └── nodata.rule
+            │   │   │   ├── gtmtu.rule
+            │   │   │   ├── nodata.rule
+            │   │   │   └── rule
+            │   │   │       ├── gtmtu.rule
+            │   │   │       └── nodata.rule
+            │   │   ├── tcp
+            │   │   │   ├── cfg
+            │   │   │   │   ├── sip-attack-dip.rule
+            │   │   │   │   ├── sip-scan-dip.rule
+            │   │   │   │   ├── sip-scan-dport.rule
+            │   │   │   │   ├── traffic-lan-sip-dip.rule
+            │   │   │   │   └── traffic-wan-sip-dip.rule
+            │   │   │   ├── rule
+            │   │   │   │   ├── sip-attack-dip.rule
+            │   │   │   │   ├── sip-scan-dip.rule
+            │   │   │   │   ├── sip-scan-dport.rule
+            │   │   │   │   ├── traffic-lan-sip-dip.rule
+            │   │   │   │   └── traffic-wan-sip-dip.rule
+            │   │   │   ├── sip-attack-dip.rule
+            │   │   │   ├── sip-scan-dip.rule
+            │   │   │   ├── sip-scan-dport.rule
+            │   │   │   ├── traffic-lan-sip-dip.rule
+            │   │   │   └── traffic-wan-sip-dip.rule
+            │   │   ├── test
+            │   │   │   ├── founds.rule
+            │   │   │   ├── test2.rule
+            │   │   │   ├── test.rule
+            │   │   │   └── unfounds.rule
+            │   │   └── udp
+            │   │       ├── cfg
+            │   │       │   ├── sip-scan-dip.rule
+            │   │       │   └── sip-scan-dport.rule
+            │   │       ├── rule
+            │   │       │   ├── sip-scan-dip.rule
+            │   │       │   └── sip-scan-dport.rule
+            │   │       ├── sip-scan-dip.rule
+            │   │       └── sip-scan-dport.rule
+            │   ├── cfg
+            │   │   ├── data
+            │   │   │   ├── emails.rule
+            │   │   │   ├── fields.rule
+            │   │   │   ├── iplist.rule
+            │   │   │   ├── itaps.rule
+            │   │   │   └── levels.rule
+            │   │   ├── emails.rule
+            │   │   ├── fields.rule
+            │   │   ├── iplist.rule
+            │   │   ├── itaps.rule
+            │   │   ├── levels.rule
+            │   │   └── output.rule
+            │   ├── globals
+            │   │   ├── cfg-debug.rule
+            │   │   ├── cfg-email.rule
+            │   │   ├── cfg-es.rule
+            │   │   ├── cfg-uints.rule
+            │   │   ├── cfg-workdays.rule
+            │   │   ├── func-misc.rule
+            │   │   └── func-query.rule
+            │   ├── hisdata
+            │   ├── readme.txt
+            │   └── tasks.json
+            ├── install.sh
+            ├── Makefile
+            ├── pkg
+            ├── release-build.sh
+            └── src
+                ├── core
+                │   ├── email
+                │   │   ├── auth.go
+                │   │   ├── doc.go
+                │   │   ├── message.go
+                │   │   ├── mime.go
+                │   │   ├── mime_go14.go
+                │   │   ├── send.go
+                │   │   ├── smtp.go
+                │   │   └── writeto.go
+                │   ├── funcs
+                │   │   ├── func_agg_items.go
+                │   │   ├── func_aggs.go
+                │   │   ├── func_alerts.go
+                │   │   ├── func_elastic.go
+                │   │   ├── func_email.go
+                │   │   ├── func_fmts.go
+                │   │   ├── func_hisdata.go
+                │   │   ├── func_items.go
+                │   │   ├── func_levels.go
+                │   │   ├── func_misc.go
+                │   │   ├── func_sqls.go
+                │   │   ├── func_stats.go
+                │   │   ├── func_throttle.go
+                │   │   ├── functions.go
+                │   │   ├── func_values.go
+                │   │   └── func_workday.go
+                │   ├── json
+                │   │   ├── build.sh
+                │   │   ├── helper.go
+                │   │   ├── json.go
+                │   │   ├── json.y
+                │   │   └── lexer.go
+                │   ├── logger
+                │   │   ├── global.go
+                │   │   ├── logger.go
+                │   │   ├── stdout.go
+                │   │   ├── syslog_linux.go
+                │   │   └── syslog_win.go
+                │   ├── options
+                │   │   ├── flag.go
+                │   │   ├── flagset.go
+                │   │   ├── goptions.go
+                │   │   ├── helpfunc.go
+                │   │   ├── marshaler.go
+                │   │   ├── mutexgroup.go
+                │   │   ├── options.go
+                │   │   ├── special_types.go
+                │   │   ├── tagparser.go
+                │   │   └── valueparser.go
+                │   ├── scanner
+                │   │   └── scanner.go
+                │   ├── script
+                │   │   ├── ast.go
+                │   │   ├── build.sh
+                │   │   ├── context.go
+                │   │   ├── exec.go
+                │   │   ├── helper.go
+                │   │   ├── lexer.go
+                │   │   ├── script.go
+                │   │   ├── script.y
+                │   │   ├── token.go
+                │   │   └── y.output
+                │   ├── sql
+                │   │   ├── ast.go
+                │   │   ├── build.sh
+                │   │   ├── helper.go
+                │   │   ├── lexer.go
+                │   │   ├── sql.go
+                │   │   ├── sql.y
+                │   │   ├── token.go
+                │   │   └── y.output
+                │   ├── sys
+                │   │   ├── file.go
+                │   │   └── time.go
+                │   ├── tools
+                │   │   ├── format.go
+                │   │   ├── ipaddr.go
+                │   │   ├── misc.go
+                │   │   ├── sort.go
+                │   │   ├── time.go
+                │   │   └── workday.go
+                │   └── value
+                │       ├── as.go
+                │       ├── comp.go
+                │       ├── in.go
+                │       ├── is.go
+                │       ├── oper.go
+                │       ├── sort.go
+                │       ├── to.go
+                │       └── types.go
+                ├── es
+                │   ├── client
+                │   │   ├── elastic.go
+                │   │   └── sql.go
+                │   └── dsl
+                │       ├── buckets.go
+                │       ├── consts.go
+                │       ├── dsl.go
+                │       ├── evals.go
+                │       ├── exec.go
+                │       ├── fileds.go
+                │       ├── filters.go
+                │       ├── metrics.go
+                │       ├── scripts.go
+                │       └── stats.go
+                ├── main
+                │   ├── sqlalert
+                │   │   ├── main.go
+                │   │   └── options.go
+                │   └── test
+                │       └── main.go
+                ├── settings
+                │   └── settings.go
+                └── tasks
+                    └── task
+                        ├── sched.go
+                        └── task.go
+
+141 directories, 577 files
